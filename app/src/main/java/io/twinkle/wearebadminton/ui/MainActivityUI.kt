@@ -34,7 +34,7 @@ fun MainActivityUI(activity: MainActivity) {
             LargeTopAppBar(
                 title = {
                     Text(
-                        "BwfBadminton",
+                        "BWF Badminton",
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )

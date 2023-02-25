@@ -101,7 +101,7 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(55.dp)
+                        .defaultMinSize(minHeight = 55.dp)
                         .padding(10.dp, 5.dp, 10.dp, 0.dp),
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
@@ -119,7 +119,7 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                     // 选手一姓名
                     Column(
                         modifier = Modifier
-                            .fillMaxHeight()
+                            .defaultMinSize(minHeight = 55.dp)
                             .padding(start = 10.dp)
                             .weight(1f),
                         verticalArrangement = Arrangement.Center
@@ -152,7 +152,7 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                     WinnerStatus(player1Scores = player1Scores, player2Scores = player2Scores)
                     // 选手一分数
                     LazyRow(
-                        modifier = Modifier.fillMaxHeight(),
+                        modifier = Modifier.defaultMinSize(minHeight = 45.dp),
                         horizontalArrangement = Arrangement.spacedBy(2.dp)
                     ) {
                         items(count = player1Scores.size) {
@@ -188,7 +188,7 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(55.dp)
+                        .defaultMinSize(minHeight = 55.dp)
                         .padding(10.dp, 5.dp, 10.dp, 0.dp),
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
@@ -206,7 +206,7 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                     // 选手二姓名
                     Column(
                         modifier = Modifier
-                            .fillMaxHeight()
+                            .defaultMinSize(minHeight = 55.dp)
                             .padding(start = 10.dp)
                             .weight(1f),
                         verticalArrangement = Arrangement.Center
@@ -239,7 +239,7 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                     WinnerStatus(player1Scores = player2Scores, player2Scores = player1Scores)
                     // 选手二分数
                     LazyRow(
-                        modifier = Modifier.fillMaxHeight(),
+                        modifier = Modifier.defaultMinSize(minHeight = 45.dp),
                         horizontalArrangement = Arrangement.spacedBy(2.dp)
                     ) {
                         items(count = player2Scores.size) {
