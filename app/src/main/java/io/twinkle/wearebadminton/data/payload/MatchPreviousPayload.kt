@@ -6,4 +6,4 @@ data class MatchPreviousPayload(
     val isPara: Boolean = false,
     val playerId: String = "",
     val previousOffset: Int = 0
-)
+): Payload

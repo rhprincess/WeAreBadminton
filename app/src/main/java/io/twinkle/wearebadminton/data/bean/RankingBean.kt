@@ -1,9 +1,17 @@
 package io.twinkle.wearebadminton.data.bean
 
+import com.github.kittinunf.fuel.core.ResponseDeserializable
+import com.google.gson.Gson
+
 data class RankingBean(
     val drawCount: Int,
     val results: Results
-)
+) {
+    class Deserializer : ResponseDeserializable<RankingBean> {
+        override fun deserialize(content: String): RankingBean? =
+            Gson().fromJson(content, RankingBean::class.java)
+    }
+}
 
 data class Results(
     val current_page: Int,

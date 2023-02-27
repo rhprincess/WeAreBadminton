@@ -5,4 +5,4 @@ data class PlayerSearchPayload(
     val drawCount: Int = 1,
     val page: Int = 1,
     val searchKey: String = ""
-)
+): Payload

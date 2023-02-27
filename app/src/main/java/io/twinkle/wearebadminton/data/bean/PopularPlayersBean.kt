@@ -1,10 +1,18 @@
 package io.twinkle.wearebadminton.data.bean
 
+import com.github.kittinunf.fuel.core.ResponseDeserializable
+import com.google.gson.Gson
+
 data class PopularPlayersBean(
     val drawCount: Int,
     val pagination: Pagination,
     val results: List<PlayerResult>
-)
+) {
+    class Deserializer : ResponseDeserializable<PopularPlayersBean> {
+        override fun deserialize(content: String): PopularPlayersBean? =
+            Gson().fromJson(content, PopularPlayersBean::class.java)
+    }
+}
 
 data class Pagination(
     val current_page: Int,

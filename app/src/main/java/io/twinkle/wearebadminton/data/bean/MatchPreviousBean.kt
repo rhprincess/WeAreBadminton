@@ -1,9 +1,17 @@
 package io.twinkle.wearebadminton.data.bean
 
+import com.github.kittinunf.fuel.core.ResponseDeserializable
+import com.google.gson.Gson
+
 data class MatchPreviousBean(
     val drawCount: Int,
     val results: MatchPreviousResults
-)
+) {
+    class Deserializer : ResponseDeserializable<MatchPreviousBean> {
+        override fun deserialize(content: String): MatchPreviousBean? =
+            Gson().fromJson(content, MatchPreviousBean::class.java)
+    }
+}
 
 data class MatchPreviousResults(
     val code: String,
@@ -41,26 +49,26 @@ data class MatchPreviousResults(
     val t1p1_firstname: String,
     val t1p1_gender: Int,
     val t1p1_lastname: String,
-    val t1p1_player_model: PlayerModel,
-    val t1p1country_model: CountryModel,
+    val t1p1_player_model: PlayerModel?,
+    val t1p1country_model: CountryModel?,
     val t1p2_country: String,
     val t1p2_firstname: String,
     val t1p2_gender: Int,
     val t1p2_lastname: String,
-    val t1p2_player_model: PlayerModel,
-    val t1p2country_model: CountryModel,
+    val t1p2_player_model: PlayerModel?,
+    val t1p2country_model: CountryModel?,
     val t2p1_country: String,
     val t2p1_firstname: String,
     val t2p1_gender: Int,
     val t2p1_lastname: String,
-    val t2p1_player_model: PlayerModel,
-    val t2p1country_model: CountryModel,
+    val t2p1_player_model: PlayerModel?,
+    val t2p1country_model: CountryModel?,
     val t2p2_country: String,
     val t2p2_firstname: String,
     val t2p2_gender: Int,
     val t2p2_lastname: String,
-    val t2p2_player_model: PlayerModel,
-    val t2p2country_model: CountryModel,
+    val t2p2_player_model: PlayerModel?,
+    val t2p2country_model: CountryModel?,
     val team1Score: String,
     val team1_link_name: String,
     val team1_match_party_id: Int,

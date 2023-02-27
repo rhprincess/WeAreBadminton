@@ -31,8 +31,8 @@ import coil.decode.ImageDecoderDecoder
 import coil.decode.SvgDecoder
 import io.twinkle.wearebadminton.data.IndonesiaOpen
 import io.twinkle.wearebadminton.data.bean.MatchPreviousResults
-import io.twinkle.wearebadminton.ui.theme.RankDownColor
 import io.twinkle.wearebadminton.ui.theme.BwfBadmintonTheme
+import io.twinkle.wearebadminton.ui.theme.RankDownColor
 import io.twinkle.wearebadminton.utilities.BwfApi
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -101,7 +101,7 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .defaultMinSize(minHeight = 55.dp)
+                        .defaultMinSize(minHeight = 45.dp)
                         .padding(10.dp, 5.dp, 10.dp, 0.dp),
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
@@ -119,7 +119,7 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                     // 选手一姓名
                     Column(
                         modifier = Modifier
-                            .defaultMinSize(minHeight = 55.dp)
+                            .defaultMinSize(minHeight = 45.dp)
                             .padding(start = 10.dp)
                             .weight(1f),
                         verticalArrangement = Arrangement.Center
@@ -159,7 +159,7 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                             if (player1Scores[it] != 0 && player2Scores[it] != 0) {
                                 Box(
                                     modifier = Modifier
-                                        .fillMaxHeight()
+                                        .defaultMinSize(minHeight = 45.dp)
                                         .width(20.dp)
                                 ) {
                                     Text(
@@ -188,7 +188,7 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .defaultMinSize(minHeight = 55.dp)
+                        .defaultMinSize(minHeight = 45.dp)
                         .padding(10.dp, 5.dp, 10.dp, 0.dp),
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
@@ -206,7 +206,7 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                     // 选手二姓名
                     Column(
                         modifier = Modifier
-                            .defaultMinSize(minHeight = 55.dp)
+                            .defaultMinSize(minHeight = 45.dp)
                             .padding(start = 10.dp)
                             .weight(1f),
                         verticalArrangement = Arrangement.Center
@@ -246,7 +246,7 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                             if (player1Scores[it] != 0 && player2Scores[it] != 0) {
                                 Box(
                                     modifier = Modifier
-                                        .fillMaxHeight()
+                                        .defaultMinSize(minHeight = 45.dp)
                                         .width(20.dp)
                                 ) {
                                     Text(

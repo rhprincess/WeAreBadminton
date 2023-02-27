@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,15 +38,16 @@ import coil.decode.ImageDecoderDecoder
 import coil.decode.SvgDecoder
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Headers
-import com.google.gson.Gson
 import io.twinkle.wearebadminton.data.bean.MatchPreviousBean
 import io.twinkle.wearebadminton.data.bean.MatchPreviousResults
+import io.twinkle.wearebadminton.data.bean.PlayerGalleryBean
 import io.twinkle.wearebadminton.data.payload.MatchPreviousPayload
+import io.twinkle.wearebadminton.data.payload.PlayerGalleryPayload
 import io.twinkle.wearebadminton.ui.theme.BwfBadmintonTheme
 import io.twinkle.wearebadminton.ui.viewmodel.PlayerProfileViewModel
+import io.twinkle.wearebadminton.ui.widget.GalleryItem
 import io.twinkle.wearebadminton.ui.widget.MatchPanel
 import io.twinkle.wearebadminton.utilities.BwfApi
-import io.twinkle.wearebadminton.utilities.genericType
 
 @Composable
 fun PlayerProfileActivityUI(playerProfileViewModel: PlayerProfileViewModel = viewModel()) {
@@ -53,6 +55,9 @@ fun PlayerProfileActivityUI(playerProfileViewModel: PlayerProfileViewModel = vie
     val previousResults = remember {
         mutableStateListOf<MatchPreviousResults>()
     }
+
+    val galleryList = remember { mutableStateListOf<String>() }
+
     val imageLoader = ImageLoader.Builder(
         LocalContext.current
     ).components {
@@ -68,37 +73,14 @@ fun PlayerProfileActivityUI(playerProfileViewModel: PlayerProfileViewModel = vie
     SideEffect {
         ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = false
 
-        for (offset in 0..2) {
-            Fuel.post(BwfApi.MATCH_PREVIOUS).body(
-                Gson().toJson(
-                    MatchPreviousPayload(
-                        playerId = uiState.id,
-                        previousOffset = offset,
-                        isPara = false,
-                        drawCount = 1 + offset
-                    )
-                )
-            )
-                .header(Headers.CONTENT_TYPE, "application/json")
-                .header(
-                    Headers.AUTHORIZATION,
-                    BwfApi.WORLD_RANKING_AUTHORIZATION
-                ).responseString { _, _, result ->
-                    result.fold({
-                        if (!it.contains("spanish-para-badminton-international-2023")) {
-                            val bean = Gson().fromJson<MatchPreviousBean>(
-                                it,
-                                genericType<MatchPreviousBean>()
-                            )
-                            if (!previousResults.contains(bean.results)) {
-                                previousResults.add(bean.results)
-                            }
-                        }
-                    }, {
-                        Log.e("WorldRanking", "failed to fetch the ranking table")
-                    })
-                }
-        }
+        fetchPreviousMatch(
+            playerId = uiState.id,
+            previousResults = previousResults,
+            offset = 0,
+            previousCount = 2
+        )
+
+        fetchPlayerGallery(playerId = uiState.id, galleryList = galleryList)
     }
 
 // Player Banner
@@ -239,8 +221,74 @@ fun PlayerProfileActivityUI(playerProfileViewModel: PlayerProfileViewModel = vie
                 }
             }
         }
+
+        // player's gallery
+        LazyRow(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(5.dp)
+        ) {
+            items(galleryList.size) {
+                GalleryItem(imgUrl = galleryList[it])
+            }
+        }
     }
 
+}
+
+private fun fetchPreviousMatch(
+    playerId: String,
+    previousResults: SnapshotStateList<MatchPreviousResults>,
+    offset: Int,
+    previousCount: Int
+) {
+    Fuel.post(BwfApi.MATCH_PREVIOUS).body(
+        MatchPreviousPayload(
+            playerId = playerId,
+            previousOffset = offset,
+            isPara = false,
+            drawCount = 1 + offset
+        ).toJson()
+    )
+        .header(Headers.CONTENT_TYPE, "application/json;charset=UTF-8")
+        .header("dnt", 1)
+        .header(
+            Headers.AUTHORIZATION,
+            BwfApi.WORLD_RANKING_AUTHORIZATION
+        ).responseObject(MatchPreviousBean.Deserializer()) { _, _, result ->
+            result.fold({
+                if (!previousResults.contains(it.results) &&
+                    it.results.t1p1_player_model != null &&
+                    (it.results.t1p1_player_model.id.toString() == playerId ||
+                            it.results.t2p1_player_model?.id.toString() == playerId ||
+                            it.results.t1p2_player_model?.id.toString() == playerId ||
+                            it.results.t2p2_player_model?.id.toString() == playerId)
+                ) {
+                    previousResults.add(it.results)
+                    if (offset <= previousCount) {
+                        fetchPreviousMatch(playerId, previousResults, offset + 1, previousCount)
+                    }
+                }
+            }, {
+                Log.e("PlayerProfile", "failed to fetch the previous match")
+            })
+        }
+}
+
+private fun fetchPlayerGallery(playerId: String, galleryList: SnapshotStateList<String>) {
+    Fuel.post(BwfApi.PLAYER_GALLERY).body(PlayerGalleryPayload(playerId = playerId).toJson())
+        .header(Headers.CONTENT_TYPE, "application/json;charset=UTF-8")
+        .header(
+            Headers.AUTHORIZATION,
+            BwfApi.WORLD_RANKING_AUTHORIZATION
+        ).responseObject(PlayerGalleryBean.Deserializer()) { _, _, result ->
+            result.fold({ bean ->
+                bean.results.forEach {
+                    if (!galleryList.contains(it.src))
+                        galleryList.add(it.src)
+                }
+            }, { it.printStackTrace() })
+        }
 }
 
 @Preview(showBackground = true)

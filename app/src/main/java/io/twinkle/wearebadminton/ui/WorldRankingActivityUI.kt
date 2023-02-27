@@ -110,10 +110,7 @@ fun WorldRankingContent(
     val rankJson = uiState.rankJson
     SideEffect {
         worldRankingViewModel.updateRankingBean(
-            Gson().fromJson<RankingBean>(
-                rankJson,
-                genericType<RankingBean>()
-            )
+            Gson().fromJson(rankJson, RankingBean::class.java)
         )
     }
 

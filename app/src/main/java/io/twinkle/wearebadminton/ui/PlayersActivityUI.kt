@@ -103,10 +103,7 @@ fun PlayersActivityUIContent(
     SideEffect {
         if (json.isNotEmpty())
             playersViewModel.updatePlayersBean(
-                bean = Gson().fromJson(
-                    json,
-                    genericType<PopularPlayersBean>()
-                )
+                bean = Gson().fromJson(json, PopularPlayersBean::class.java)
             )
     }
 
@@ -173,7 +170,7 @@ private fun RefreshPopularPlayers(playersViewModel: PlayersViewModel) {
     val uiState by playersViewModel.uiState.collectAsState()
     SideEffect {
         Fuel.post(BwfApi.SEARCH_PLAYERS)
-            .body(Gson().toJson(uiState.searchApiBean))
+            .body(uiState.searchApiBean.toJson())
             .header(Headers.CONTENT_TYPE, "application/json")
             .header(
                 Headers.AUTHORIZATION,

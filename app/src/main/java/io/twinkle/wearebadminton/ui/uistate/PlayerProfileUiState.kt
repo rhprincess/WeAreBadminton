@@ -6,6 +6,7 @@ data class PlayerProfileUiState(
     val country: String = "",
     val worldRank: String = "...",
 //    val worldTourRank: String = "...",
+    val previousLoading: Boolean = true,
     val bannerImgUrl: String = "",
     val avatarUrl: String = "",
     val flagUrl: String = "",

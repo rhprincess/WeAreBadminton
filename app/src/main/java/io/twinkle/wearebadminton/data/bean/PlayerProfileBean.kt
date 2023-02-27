@@ -1,9 +1,17 @@
 package io.twinkle.wearebadminton.data.bean
 
+import com.github.kittinunf.fuel.core.ResponseDeserializable
+import com.google.gson.Gson
+
 data class PlayerProfileBean(
     val drawCount: Int,
     val results: ProfileResult
-)
+) {
+    class Deserializer : ResponseDeserializable<PlayerProfileBean> {
+        override fun deserialize(content: String): PlayerProfileBean? =
+            Gson().fromJson(content, PlayerProfileBean::class.java)
+    }
+}
 
 data class ProfileResult(
     val active: Int,

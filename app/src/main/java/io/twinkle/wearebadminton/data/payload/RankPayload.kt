@@ -12,4 +12,4 @@ data class RankPayload(
     val pageKey: String = "100",
     val page: Int = 1,
     val drawCount: Int = 1
-)
+) : Payload
