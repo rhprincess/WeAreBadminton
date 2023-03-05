@@ -10,8 +10,6 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -29,17 +27,22 @@ import coil.decode.ImageDecoderDecoder
 import coil.decode.SvgDecoder
 import io.twinkle.wearebadminton.R
 import io.twinkle.wearebadminton.activity.PlayerProfileActivity
-import io.twinkle.wearebadminton.data.bean.Data
+import io.twinkle.wearebadminton.data.bean.PlayerData
+import io.twinkle.wearebadminton.ui.theme.BwfBadmintonTheme
 import io.twinkle.wearebadminton.ui.theme.RankDownColor
 import io.twinkle.wearebadminton.ui.theme.RankUpColor
-import io.twinkle.wearebadminton.ui.theme.BwfBadmintonTheme
 import io.twinkle.wearebadminton.ui.viewmodel.WorldRankingViewModel
+import io.twinkle.wearebadminton.utilities.BwfApi
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
 @Composable
-fun WorldRankingCard(viewModel: WorldRankingViewModel = viewModel(), data: Data) {
-    val uiState by viewModel.uiState.collectAsState()
+fun WorldRankingCard(
+    viewModel: WorldRankingViewModel = viewModel(),
+    index: Int,
+    catId: Int,
+    data: PlayerData
+) {
     val context = LocalContext.current
     Column(
         modifier = Modifier
@@ -52,13 +55,19 @@ fun WorldRankingCard(viewModel: WorldRankingViewModel = viewModel(), data: Data)
                 .fillMaxWidth()
                 .defaultMinSize(minHeight = 55.dp)
                 .clickable {
-                    val intent = Intent()
-                    intent.putExtra("playerId", data.player1_id)
-                    intent.setClass(
-                        context,
-                        PlayerProfileActivity::class.java
-                    )
-                    context.startActivity(intent)
+                    viewModel.setRankIndex(index)
+                    if (data.player2_model == null) {
+                        val intent = Intent()
+                        intent.putExtra("playerId", data.player1_id)
+                        intent.putExtra("catId", catId)
+                        intent.setClass(
+                            context,
+                            PlayerProfileActivity::class.java
+                        )
+                        context.startActivity(intent)
+                    } else {
+                        viewModel.showPlayerChoices(true)
+                    }
                 }
         ) {
             // Rank
@@ -122,7 +131,7 @@ fun WorldRankingCard(viewModel: WorldRankingViewModel = viewModel(), data: Data)
                     .size(32.dp)
                     .padding(3.dp)
                     .align(Alignment.CenterVertically),
-                model = "https://extranet.bwfbadminton.com/docs/flags-svg/" + data.player1_model.country_model.flag_name_svg,
+                model = BwfApi.FLAG_URL + data.player1_model.country_model.flag_name_svg,
                 contentDescription = "nation",
                 imageLoader = ImageLoader.Builder(
                     LocalContext.current
@@ -243,7 +252,6 @@ fun WorldRankingCardPlacement() {
                     contentDescription = "tournaments",
                 )
             }
-
         }
         Spacer(modifier = Modifier.width(10.dp))
         // Points

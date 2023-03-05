@@ -1,5 +1,7 @@
 package io.twinkle.wearebadminton.ui.uistate
 
+import io.twinkle.wearebadminton.data.bean.BioModel
+
 data class PlayerProfileUiState(
     val id: String = "",
     val name: String = "",
@@ -10,5 +12,7 @@ data class PlayerProfileUiState(
     val bannerImgUrl: String = "",
     val avatarUrl: String = "",
     val flagUrl: String = "",
-    val lastName: String = ""
+    val lastName: String = "",
+    val bioModel: BioModel? = null,
+    val catId: Int = 6
 )

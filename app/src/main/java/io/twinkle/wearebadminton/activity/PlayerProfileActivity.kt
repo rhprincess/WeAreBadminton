@@ -9,7 +9,6 @@ import androidx.core.view.WindowCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Headers
-import com.google.gson.Gson
 import io.twinkle.wearebadminton.data.bean.CurrentRankBean
 import io.twinkle.wearebadminton.data.bean.PlayerProfileBean
 import io.twinkle.wearebadminton.data.payload.CurrentRankPayload
@@ -25,6 +24,7 @@ class PlayerProfileActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val playerId = intent.getIntExtra("playerId", 57945)
+        val catId = intent.getIntExtra("catId", 6)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             BwfBadmintonTheme(statusBarColor = Color.Transparent) {
@@ -44,12 +44,14 @@ class PlayerProfileActivity : ComponentActivity() {
                                 playerProfileViewModel.update { currentState ->
                                     currentState.copy(
                                         id = playerId.toString(),
+                                        catId = catId,
                                         name = it.results.name_display,
                                         country = it.results.country_model.name,
                                         bannerImgUrl = it.results.hero_image.url_cloudinary,
                                         flagUrl = BwfApi.FLAG_URL + it.results.country_model.flag_name_svg,
                                         avatarUrl = it.results.avatar.url_cloudinary,
-                                        lastName = it.results.last_name
+                                        lastName = it.results.last_name,
+                                        bioModel = it.results.bio_model
                                     )
                                 }
                             }, { it.printStackTrace() })

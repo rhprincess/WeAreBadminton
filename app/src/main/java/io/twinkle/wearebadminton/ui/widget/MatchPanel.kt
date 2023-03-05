@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -29,6 +30,7 @@ import coil.compose.AsyncImage
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.decode.SvgDecoder
+import io.twinkle.wearebadminton.R
 import io.twinkle.wearebadminton.data.IndonesiaOpen
 import io.twinkle.wearebadminton.data.bean.MatchPreviousResults
 import io.twinkle.wearebadminton.ui.theme.BwfBadmintonTheme
@@ -64,7 +66,7 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
             .background(MaterialTheme.colorScheme.background, shape = RoundedCornerShape(8.dp))
             .border(
                 width = 1.dp,
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.15f),
                 shape = RoundedCornerShape(8.dp)
             )
     ) {
@@ -148,8 +150,22 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                             )
                         }
                     }
+
+                    // 比赛状态 如: Walkover, retired
+                    if (results?.winner == 2) {
+                        Text(
+                            text = results.status_name,
+                            fontSize = 12.sp,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        )
+                    }
+
                     // 赢输状态
-                    WinnerStatus(player1Scores = player1Scores, player2Scores = player2Scores)
+                    if (results?.match_set_model != null && results.match_set_model.isNotEmpty()) {
+                        WinnerStatus(player1Scores = player1Scores, player2Scores = player2Scores)
+                    } else {
+                        WinnerStatus(winner = results?.winner == 1)
+                    }
                     // 选手一分数
                     LazyRow(
                         modifier = Modifier.defaultMinSize(minHeight = 45.dp),
@@ -235,8 +251,23 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                             )
                         }
                     }
+
+                    // 比赛状态 如: Walkover, retired
+                    if (results?.winner == 1) {
+                        Text(
+                            text = results.status_name,
+                            fontSize = 12.sp,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        )
+                    }
+
                     // 赢输状态
-                    WinnerStatus(player1Scores = player2Scores, player2Scores = player1Scores)
+                    if (results?.match_set_model != null && results.match_set_model.isNotEmpty()) {
+                        WinnerStatus(player1Scores = player2Scores, player2Scores = player1Scores)
+                    } else {
+                        WinnerStatus(winner = results?.winner == 2)
+                    }
+
                     // 选手二分数
                     LazyRow(
                         modifier = Modifier.defaultMinSize(minHeight = 45.dp),
@@ -274,28 +305,36 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
             }
 
             // Round & Duration
-            Box(
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(25.dp)
-                    .padding(10.dp, 5.dp, 10.dp, 0.dp)
+                    .padding(10.dp, 5.dp, 10.dp, 5.dp)
             ) {
                 // EVENT
                 Text(
                     text = if (results?.tournament_model?.name != null) "ROUND - EVENT: " + results.draw_model.name else "",
                     fontSize = 12.sp,
-                    modifier = Modifier
-                        .align(Alignment.CenterStart),
+                    modifier = Modifier.weight(1f),
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
 
-//                Text(
-//                    text = if (results?.tournament_model?.name != null) results.draw_model.name else "",
-//                    fontSize = 12.sp,
-//                    modifier = Modifier
-//                        .align(Alignment.CenterEnd),
-//                    color = MaterialTheme.colorScheme.onPrimaryContainer
-//                )
+                Row(
+                    modifier = Modifier.fillMaxHeight()
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.time),
+                        contentDescription = "Duration",
+                        modifier = Modifier.size(25.dp),
+                        tint = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                    Spacer(modifier = Modifier.width(3.dp))
+                    Text(
+                        text = if (results?.duration != null) convertTime(results.duration) else "",
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                }
             }
         }
     }
@@ -305,6 +344,20 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
 private fun WinnerStatus(player1Scores: List<Int>, player2Scores: List<Int>) {
     val won = isWinner(player1Scores, player2Scores)
     if (won) {
+        Box(modifier = Modifier.size(16.dp)) {
+            Icon(
+                imageVector = Icons.Filled.Done,
+                contentDescription = "Won",
+                modifier = Modifier.fillMaxSize(),
+                tint = RankDownColor
+            )
+        }
+    }
+}
+
+@Composable
+private fun WinnerStatus(winner: Boolean) {
+    if (winner) {
         Box(modifier = Modifier.size(16.dp)) {
             Icon(
                 imageVector = Icons.Filled.Done,
@@ -345,6 +398,13 @@ private fun isWinner(player1Scores: List<Int>, player2Scores: List<Int>): Boolea
         }
     }
     return wons >= 2
+}
+
+private fun convertTime(time: Int): String {
+    val h = time / 60
+    val hourMin = h * 60
+    val min = time - hourMin
+    return "$h:$min"
 }
 
 @Preview(showBackground = true, uiMode = UI_MODE_NIGHT_NO)

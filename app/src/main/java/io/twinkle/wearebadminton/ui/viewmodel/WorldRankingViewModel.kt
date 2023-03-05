@@ -1,8 +1,8 @@
 package io.twinkle.wearebadminton.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import io.twinkle.wearebadminton.data.payload.RankPayload
 import io.twinkle.wearebadminton.data.bean.RankingBean
+import io.twinkle.wearebadminton.data.payload.RankPayload
 import io.twinkle.wearebadminton.ui.uistate.WorldRankingUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -41,6 +41,18 @@ class WorldRankingViewModel : ViewModel() {
     fun finishLoadingAnimation(finish: Boolean) {
         _uiState.update { currentState ->
             currentState.copy(loadingAnimationFinished = finish)
+        }
+    }
+
+    fun showPlayerChoices(show: Boolean) {
+        _uiState.update { currentState ->
+            currentState.copy(showPlayerChoices = show)
+        }
+    }
+
+    fun setRankIndex(index: Int) {
+        _uiState.update { currentState ->
+            currentState.copy(rankIndex = index)
         }
     }
 

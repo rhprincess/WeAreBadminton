@@ -15,7 +15,7 @@ data class RankingBean(
 
 data class Results(
     val current_page: Int,
-    val `data`: List<Data>,
+    val `data`: List<PlayerData>,
     val first_page_url: String,
     val from: Int,
     val last_page: Int,
@@ -28,7 +28,7 @@ data class Results(
     val total: Int
 )
 
-data class Data(
+data class PlayerData(
     val close: Any,
     val confederation_id: Int,
     val id: Int,

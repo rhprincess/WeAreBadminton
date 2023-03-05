@@ -8,5 +8,7 @@ data class WorldRankingUiState(
     val rankJson: String = "",
     val bean: RankingBean? = null,
     val isLoading: Boolean = true,
-    val loadingAnimationFinished: Boolean = false
+    val loadingAnimationFinished: Boolean = false,
+    val showPlayerChoices: Boolean = false,
+    val rankIndex: Int = 0
 )

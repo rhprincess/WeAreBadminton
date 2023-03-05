@@ -59,6 +59,11 @@ object BwfApi {
     const val PLAYER_GALLERY = "https://extranet-lv.bwfbadminton.com/api/vue-player-gallery"
 
     /**
+     * BREAKING DOWN
+     */
+    const val BREAKING_DOWN = "https://extranet-lv.bwfbadminton.com/api/vue-rankingbreakdown"
+
+    /**
      * 世界排名 Api
      */
     const val WORLD_RANKING = "https://extranet-lv.bwfbadminton.com/api/vue-rankingtable"
