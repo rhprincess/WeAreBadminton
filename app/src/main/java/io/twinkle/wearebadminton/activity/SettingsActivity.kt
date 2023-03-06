@@ -5,15 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewmodel.compose.viewModel
-import io.twinkle.wearebadminton.ui.PlayersActivityUI
+import io.twinkle.wearebadminton.ui.SettingsUI
 import io.twinkle.wearebadminton.ui.theme.BwfBadmintonTheme
-import io.twinkle.wearebadminton.ui.viewmodel.PlayersViewModel
 import io.twinkle.wearebadminton.utilities.Constants
 import io.twinkle.wearebadminton.utilities.settings
 import kotlinx.coroutines.launch
 
-class PlayersActivity : ComponentActivity() {
+class SettingsActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,8 +23,7 @@ class PlayersActivity : ComponentActivity() {
         }
         setContent {
             BwfBadmintonTheme(theme = theme.value) {
-                val playersViewModel = viewModel<PlayersViewModel>()
-                PlayersActivityUI(playersViewModel = playersViewModel)
+                SettingsUI()
             }
         }
     }

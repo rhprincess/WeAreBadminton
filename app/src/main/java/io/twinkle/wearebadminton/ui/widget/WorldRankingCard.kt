@@ -10,6 +10,8 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -33,6 +35,7 @@ import io.twinkle.wearebadminton.ui.theme.RankDownColor
 import io.twinkle.wearebadminton.ui.theme.RankUpColor
 import io.twinkle.wearebadminton.ui.viewmodel.WorldRankingViewModel
 import io.twinkle.wearebadminton.utilities.BwfApi
+import kotlinx.coroutines.launch
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
@@ -183,6 +186,8 @@ fun WorldRankingCard(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WorldRankingCardPlacement() {
+    val tooltipState = remember { PlainTooltipState() }
+    val coroutineScope = rememberCoroutineScope()
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -239,14 +244,23 @@ fun WorldRankingCardPlacement() {
                 .height(45.dp),
             contentAlignment = Alignment.Center
         ) {
-            PlainTooltipBox(tooltip = {
-                Text(
-                    text = "赛季参加赛事数量",
-                    textAlign = TextAlign.Start,
-                    fontSize = 13.sp,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-            }, containerColor = MaterialTheme.colorScheme.primaryContainer) {
+            PlainTooltipBox(
+                tooltip = {
+                    Text(
+                        text = "赛季参加赛事数量",
+                        textAlign = TextAlign.Start,
+                        fontSize = 13.sp,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                },
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                tooltipState = tooltipState,
+                modifier = Modifier.clickable {
+                    coroutineScope.launch {
+                        tooltipState.show()
+                    }
+                }
+            ) {
                 Icon(
                     imageVector = Icons.Outlined.Info,
                     contentDescription = "tournaments",

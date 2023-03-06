@@ -2,17 +2,14 @@ package io.twinkle.wearebadminton.ui
 
 import android.os.Build
 import android.util.Log
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.KeyboardArrowRight
@@ -306,6 +303,7 @@ fun PlayerProfileActivityUI(playerProfileViewModel: PlayerProfileViewModel = vie
             val lazyListState2 = rememberLazyListState()
             val screenWidth = LocalConfiguration.current.screenWidthDp.dp
             val coroutineScope = rememberCoroutineScope()
+            val tooltipState = remember { PlainTooltipState() }
 
             TitleWithPageControl(
                 title = "近期比赛",
@@ -344,17 +342,26 @@ fun PlayerProfileActivityUI(playerProfileViewModel: PlayerProfileViewModel = vie
                         .height(45.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    PlainTooltipBox(tooltip = {
-                        Text(
-                            text = "赛季积分需从世界排名页面获取，赛季积分是指该球员本赛季内所参加的比赛获取的世界排名积分，世界排名积分即赛季积分总和",
-                            textAlign = TextAlign.Start,
-                            fontSize = 13.sp,
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
-                    }, containerColor = MaterialTheme.colorScheme.primaryContainer) {
+                    PlainTooltipBox(
+                        tooltip = {
+                            Text(
+                                text = "赛季积分需从世界排名页面获取，赛季积分是指该球员本赛季内所参加的比赛获取的世界排名积分，世界排名积分即赛季积分总和",
+                                textAlign = TextAlign.Start,
+                                fontSize = 13.sp,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                        },
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        tooltipState = tooltipState,
+                        modifier = Modifier.clickable {
+                            coroutineScope.launch {
+                                tooltipState.show()
+                            }
+                        }) {
                         Icon(
                             imageVector = Icons.Outlined.Info,
                             contentDescription = "tournaments",
+                            tint = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 }

@@ -1,7 +1,11 @@
 package io.twinkle.wearebadminton.utilities
 
+import android.content.Context
 import androidx.activity.ComponentActivity
 import androidx.activity.OnBackPressedCallback
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.twinkle.wearebadminton.data.SerializableMatchData
@@ -24,3 +28,5 @@ fun getMatchesHistory(json: String): ArrayList<SerializableMatchData> {
         Gson().fromJson(json, genericType<ArrayList<SerializableMatchData>>())
     }
 }
+
+val Context.settings: DataStore<Preferences> by preferencesDataStore(name = Constants.SETTINGS)

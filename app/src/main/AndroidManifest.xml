@@ -63,6 +63,11 @@
             android:name=".activity.HeadToHeadActivity"
             android:exported="true"
             android:theme="@style/Theme.WeAreBadminton" />
+
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:exported="true"
+            android:theme="@style/Theme.WeAreBadminton" />
     </application>
 
 </manifest>

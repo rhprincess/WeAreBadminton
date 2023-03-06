@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Headers
@@ -18,6 +20,9 @@ import io.twinkle.wearebadminton.ui.PlayerProfileActivityUI
 import io.twinkle.wearebadminton.ui.theme.BwfBadmintonTheme
 import io.twinkle.wearebadminton.ui.viewmodel.PlayerProfileViewModel
 import io.twinkle.wearebadminton.utilities.BwfApi
+import io.twinkle.wearebadminton.utilities.Constants
+import io.twinkle.wearebadminton.utilities.settings
+import kotlinx.coroutines.launch
 
 class PlayerProfileActivity : ComponentActivity() {
 
@@ -26,8 +31,14 @@ class PlayerProfileActivity : ComponentActivity() {
         val playerId = intent.getIntExtra("playerId", 57945)
         val catId = intent.getIntExtra("catId", 6)
         WindowCompat.setDecorFitsSystemWindows(window, false)
+        val theme = mutableStateOf(0)
+        lifecycleScope.launch {
+            settings.data.collect {
+                theme.value = it[Constants.KEY_THEME] ?: 0
+            }
+        }
         setContent {
-            BwfBadmintonTheme(statusBarColor = Color.Transparent) {
+            BwfBadmintonTheme(theme = theme.value, statusBarColor = Color.Transparent) {
                 val playerProfileViewModel = viewModel<PlayerProfileViewModel>()
                 val playerSummaryApiBean = PlayerSummaryPayload(playerId = playerId.toString())
                 SideEffect {
