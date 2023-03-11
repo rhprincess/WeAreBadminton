@@ -32,13 +32,15 @@ class PlayerProfileActivity : ComponentActivity() {
         val catId = intent.getIntExtra("catId", 6)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         val theme = mutableStateOf(0)
+        val dynamicColor = mutableStateOf(true)
         lifecycleScope.launch {
             settings.data.collect {
                 theme.value = it[Constants.KEY_THEME] ?: 0
+                dynamicColor.value = it[Constants.KEY_DYNAMIC_COLOR] ?: true
             }
         }
         setContent {
-            BwfBadmintonTheme(theme = theme.value, statusBarColor = Color.Transparent) {
+            BwfBadmintonTheme(theme = theme.value, statusBarColor = Color.Transparent, dynamicColor = dynamicColor.value) {
                 val playerProfileViewModel = viewModel<PlayerProfileViewModel>()
                 val playerSummaryApiBean = PlayerSummaryPayload(playerId = playerId.toString())
                 SideEffect {
@@ -48,7 +50,7 @@ class PlayerProfileActivity : ComponentActivity() {
                         .header(Headers.CONTENT_TYPE, "application/json")
                         .header(
                             Headers.AUTHORIZATION,
-                            BwfApi.WORLD_RANKING_AUTHORIZATION
+                            BwfApi.BWFAPI_AUTHORIZATION
                         )
                         .responseObject(PlayerProfileBean.Deserializer()) { _, _, result ->
                             result.fold({
@@ -74,7 +76,7 @@ class PlayerProfileActivity : ComponentActivity() {
                         .header(Headers.CONTENT_TYPE, "application/json")
                         .header(
                             Headers.AUTHORIZATION,
-                            BwfApi.WORLD_RANKING_AUTHORIZATION
+                            BwfApi.BWFAPI_AUTHORIZATION
                         ).responseString { _, _, _result ->
                             _result.fold({ s ->
                                 val regex = "\"id\":\"(([\\s\\S])*?)\"".toRegex()
@@ -91,7 +93,7 @@ class PlayerProfileActivity : ComponentActivity() {
                                     .header(Headers.CONTENT_TYPE, "application/json")
                                     .header(
                                         Headers.AUTHORIZATION,
-                                        BwfApi.WORLD_RANKING_AUTHORIZATION
+                                        BwfApi.BWFAPI_AUTHORIZATION
                                     )
                                     .responseObject(CurrentRankBean.Deserializer()) { _, _, result ->
                                         result.fold({

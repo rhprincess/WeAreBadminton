@@ -33,9 +33,8 @@ import io.twinkle.wearebadminton.activity.PlayerProfileActivity
 import io.twinkle.wearebadminton.data.bean.PopularPlayersBean
 import io.twinkle.wearebadminton.ui.theme.BwfBadmintonTheme
 import io.twinkle.wearebadminton.ui.viewmodel.PlayersViewModel
-import io.twinkle.wearebadminton.ui.widget.PlayerAvatarCard
+import io.twinkle.wearebadminton.ui.widget.PlayerAvatarCardVertical
 import io.twinkle.wearebadminton.utilities.BwfApi
-import io.twinkle.wearebadminton.utilities.genericType
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -155,7 +154,7 @@ fun PlayersActivityUIContent(
                             )
                             context.startActivity(intent)
                         }, contentAlignment = Alignment.Center) {
-                            PlayerAvatarCard(result = list[it])
+                            PlayerAvatarCardVertical(result = list[it])
                         }
                     }
                 }
@@ -174,7 +173,7 @@ private fun RefreshPopularPlayers(playersViewModel: PlayersViewModel) {
             .header(Headers.CONTENT_TYPE, "application/json")
             .header(
                 Headers.AUTHORIZATION,
-                BwfApi.WORLD_RANKING_AUTHORIZATION
+                BwfApi.BWFAPI_AUTHORIZATION
             )
             .responseString { _, _, result ->
                 result.fold({

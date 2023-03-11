@@ -59,6 +59,8 @@ import io.twinkle.wearebadminton.ui.theme.BwfBadmintonTheme
 import io.twinkle.wearebadminton.ui.viewmodel.PlayerProfileViewModel
 import io.twinkle.wearebadminton.ui.widget.*
 import io.twinkle.wearebadminton.utilities.BwfApi
+import io.twinkle.wearebadminton.utilities.Constants
+import io.twinkle.wearebadminton.utilities.settings
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.launch
@@ -68,6 +70,7 @@ import kotlin.math.roundToInt
 @Composable
 fun PlayerProfileActivityUI(playerProfileViewModel: PlayerProfileViewModel = viewModel()) {
     val uiState by playerProfileViewModel.uiState.collectAsState()
+    val context = LocalContext.current
     val previousResults = remember {
         mutableStateListOf<MatchPreviousResults>()
     }
@@ -84,13 +87,23 @@ fun PlayerProfileActivityUI(playerProfileViewModel: PlayerProfileViewModel = vie
         }
     }.build()
 
+    val previousSizeCount = remember { mutableStateOf(4) }
+    var showBreakingDown by remember { mutableStateOf(true) }
+    LaunchedEffect(key1 = Unit) {
+        context.settings.data.collect {
+            previousSizeCount.value = it[Constants.KEY_MATCH_PREVIOUS_SIZE] ?: 4
+            showBreakingDown = it[Constants.KEY_SHOW_BREAKING_DOWN] ?: true
+        }
+    }
+
     val scrollState = rememberScrollState()
     // 定义 ToolBar 的高度
     val toolbarHeight = 225.dp
+    val statusBarHeight = 42.dp
     // ToolBar 最大向上位移量
     // 56.dp 参考自 androidx.compose.material AppBar.kt 里面定义的 private val AppBarHeight = 56.dp
     val maxUpPx = with(LocalDensity.current) {
-        toolbarHeight.roundToPx().toFloat() - 169.dp.roundToPx().toFloat()
+        56.dp.value + statusBarHeight.value
     }
     // ToolBar 最小向上位移量
     val minUpPx = 0f
@@ -113,16 +126,25 @@ fun PlayerProfileActivityUI(playerProfileViewModel: PlayerProfileViewModel = vie
     SideEffect {
         ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = false
 
+        fetchPlayerData(playerName = uiState.name, uiState.catId, breakingDownList)
+
         fetchPreviousMatch(
             playerId = uiState.id,
             previousResults = previousResults,
             offset = 0,
-            previousCount = 2
+            previousCount = when (previousSizeCount.value) {
+                2 -> 0
+                3 -> 1
+                4 -> 2
+                5 -> 3
+                6 -> 4
+                7 -> 5
+                8 -> 6
+                else -> 2
+            }
         )
 
         fetchPlayerGallery(playerId = uiState.id, galleryList = galleryList)
-
-        fetchPlayerData(playerName = uiState.name, uiState.catId, breakingDownList)
     }
 
     // Player Banner
@@ -252,6 +274,7 @@ fun PlayerProfileActivityUI(playerProfileViewModel: PlayerProfileViewModel = vie
             modifier = Modifier
                 .fillMaxWidth()
                 .background(MaterialTheme.colorScheme.surface)
+                .padding(bottom = 16.dp)
                 .verticalScroll(scrollState)
         ) {
 
@@ -303,10 +326,9 @@ fun PlayerProfileActivityUI(playerProfileViewModel: PlayerProfileViewModel = vie
             val lazyListState2 = rememberLazyListState()
             val screenWidth = LocalConfiguration.current.screenWidthDp.dp
             val coroutineScope = rememberCoroutineScope()
-            val tooltipState = remember { PlainTooltipState() }
 
             TitleWithPageControl(
-                title = "近期比赛",
+                title = "近期比赛 (${previousResults.size})",
                 modifier = Modifier.fillMaxWidth(),
                 lazyListState = lazyListState1,
                 coroutineScope = coroutineScope,
@@ -331,85 +353,83 @@ fun PlayerProfileActivityUI(playerProfileViewModel: PlayerProfileViewModel = vie
                 }
             }
 
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                TextTitle(title = "赛季积分")
-                Box(
-                    modifier = Modifier
-                        .width(30.dp)
-                        .height(45.dp),
-                    contentAlignment = Alignment.Center
+            if (showBreakingDown) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    PlainTooltipBox(
-                        tooltip = {
-                            Text(
-                                text = "赛季积分需从世界排名页面获取，赛季积分是指该球员本赛季内所参加的比赛获取的世界排名积分，世界排名积分即赛季积分总和",
-                                textAlign = TextAlign.Start,
-                                fontSize = 13.sp,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-                        },
-                        containerColor = MaterialTheme.colorScheme.primaryContainer,
-                        tooltipState = tooltipState,
-                        modifier = Modifier.clickable {
-                            coroutineScope.launch {
-                                tooltipState.show()
-                            }
-                        }) {
-                        Icon(
-                            imageVector = Icons.Outlined.Info,
-                            contentDescription = "tournaments",
-                            tint = MaterialTheme.colorScheme.onSurface
-                        )
-                    }
-                }
-            }
-
-            Column(
-                Modifier
-                    .padding(horizontal = 16.dp)
-                    .background(
-                        MaterialTheme.colorScheme.background,
-                        shape = RoundedCornerShape(8.dp)
-                    )
-                    .border(
-                        width = 1.dp,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.15f),
-                        shape = RoundedCornerShape(8.dp)
-                    )
-            ) {
-                BreakingDownCardPlacement()
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(
-                            when (breakingDownList.size) {
-                                0 -> 32.dp
-                                1, 2, 3 -> screenWidth / 2
-                                else -> screenWidth
-                            }
-                        )
-                ) {
-                    if (breakingDownList.size == 0) {
-                        item {
-                            Box(
-                                modifier = Modifier.fillMaxSize(),
-                                contentAlignment = Alignment.Center
-                            ) {
+                    TextTitle(title = "赛季积分")
+                    Box(
+                        modifier = Modifier
+                            .width(30.dp)
+                            .height(45.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        PlainTooltipBox(
+                            tooltip = {
                                 Text(
-                                    text = "无赛事积分数据",
-                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.25f),
-                                    style = MaterialTheme.typography.bodyLarge
+                                    text = "赛季积分需从世界排名页面获取，赛季积分是指该球员本赛季内所参加的比赛获取的世界排名积分，世界排名积分即赛季积分总和",
+                                    textAlign = TextAlign.Start,
+                                    fontSize = 13.sp,
+                                    color = MaterialTheme.colorScheme.onSurface
                                 )
-                            }
+                            },
+                            containerColor = MaterialTheme.colorScheme.primaryContainer
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Info,
+                                contentDescription = "tournaments",
+                                tint = MaterialTheme.colorScheme.onSurface
+                            )
                         }
                     }
-                    items(breakingDownList.size) {
-                        BreakingDownCard(breaks = breakingDownList[it])
+                }
+
+                Column(
+                    Modifier
+                        .padding(horizontal = 16.dp)
+                        .background(
+                            MaterialTheme.colorScheme.background,
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                        .border(
+                            width = 1.dp,
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.15f),
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                ) {
+                    BreakingDownCardPlacement()
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(
+                                when (breakingDownList.size) {
+                                    0 -> 32.dp
+                                    1, 2, 3 -> screenWidth / 2
+                                    else -> screenWidth
+                                }
+                            )
+                    ) {
+                        if (breakingDownList.size == 0) {
+                            item {
+                                Box(
+                                    modifier = Modifier.fillMaxSize(),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        text = "无赛事积分数据",
+                                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.25f),
+                                        style = MaterialTheme.typography.bodyLarge
+                                    )
+                                }
+                            }
+                        }
+                        items(breakingDownList.size) {
+                            BreakingDownCard(breaks = breakingDownList[it])
+                        }
                     }
                 }
+
             }
 
             TitleWithPageControl(
@@ -506,7 +526,7 @@ private fun fetchPreviousMatch(
         .header("dnt", 1)
         .header(
             Headers.AUTHORIZATION,
-            BwfApi.WORLD_RANKING_AUTHORIZATION
+            BwfApi.BWFAPI_AUTHORIZATION
         ).responseObject(MatchPreviousBean.Deserializer()) { _, _, result ->
             result.fold({
                 if (!previousResults.contains(it.results) &&
@@ -532,7 +552,7 @@ private fun fetchPlayerGallery(playerId: String, galleryList: SnapshotStateList<
         .header(Headers.CONTENT_TYPE, "application/json;charset=UTF-8")
         .header(
             Headers.AUTHORIZATION,
-            BwfApi.WORLD_RANKING_AUTHORIZATION
+            BwfApi.BWFAPI_AUTHORIZATION
         ).responseObject(PlayerGalleryBean.Deserializer()) { _, _, result ->
             result.fold({ bean ->
                 bean.results.forEach {
@@ -558,7 +578,7 @@ private fun fetchPlayerData(
         .header(Headers.CONTENT_TYPE, "application/json")
         .header(
             Headers.AUTHORIZATION,
-            BwfApi.WORLD_RANKING_AUTHORIZATION
+            BwfApi.BWFAPI_AUTHORIZATION
         )
         .responseString { _, _, result ->
             result.fold({
@@ -605,7 +625,7 @@ private fun fetchBreakingDown(
         .header(Headers.CONTENT_TYPE, "application/json;charset=UTF-8")
         .header(
             Headers.AUTHORIZATION,
-            BwfApi.WORLD_RANKING_AUTHORIZATION
+            BwfApi.BWFAPI_AUTHORIZATION
         ).responseString { _, _, result ->
             result.fold({ s ->
                 val bean = Gson().fromJson(s, Array<Breaks>::class.java)

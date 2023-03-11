@@ -41,11 +41,14 @@ import io.twinkle.wearebadminton.ui.widget.TextTitle
 import io.twinkle.wearebadminton.ui.widget.WorldRankingCard
 import io.twinkle.wearebadminton.ui.widget.WorldRankingCardPlacement
 import io.twinkle.wearebadminton.utilities.BwfApi
+import io.twinkle.wearebadminton.utilities.Constants
+import io.twinkle.wearebadminton.utilities.settings
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WorldRanking(worldRankingViewModel: WorldRankingViewModel = viewModel()) {
     val uiState by worldRankingViewModel.uiState.collectAsState()
+    val context = LocalContext.current
     val alpha by animateFloatAsState(
         targetValue = if (uiState.isLoading) 1f else 0f,
         tween(durationMillis = 300),
@@ -55,9 +58,17 @@ fun WorldRanking(worldRankingViewModel: WorldRankingViewModel = viewModel()) {
         })
     val scrollBehavior =
         TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+    val perPageKey = remember { mutableStateOf(100) }
+    var perPageKeyLoaded by remember { mutableStateOf(false) }
+    LaunchedEffect(key1 = Unit) {
+        context.settings.data.collect {
+            perPageKey.value = it[Constants.WORLD_RANKING_COUNT_PER_PAGE] ?: 100
+            perPageKeyLoaded = true
+        }
+    }
     // Side-load the ranking table
-    if (uiState.isLoading) {
-        RefreshRanking(worldRankingViewModel = worldRankingViewModel)
+    if (uiState.isLoading && perPageKeyLoaded) {
+        RefreshRanking(perPageKey = perPageKey.value, worldRankingViewModel = worldRankingViewModel)
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -265,15 +276,16 @@ fun WorldRankingContent(
 }
 
 @Composable
-private fun RefreshRanking(worldRankingViewModel: WorldRankingViewModel) {
+private fun RefreshRanking(perPageKey: Int, worldRankingViewModel: WorldRankingViewModel) {
     val uiState by worldRankingViewModel.uiState.collectAsState()
+
     SideEffect {
         Fuel.post(BwfApi.WORLD_RANKING)
-            .body(Gson().toJson(uiState.apiBean))
+            .body(uiState.apiBean.copy(pageKey = "$perPageKey").toJson())
             .header(Headers.CONTENT_TYPE, "application/json")
             .header(
                 Headers.AUTHORIZATION,
-                BwfApi.WORLD_RANKING_AUTHORIZATION
+                BwfApi.BWFAPI_AUTHORIZATION
             )
             .responseString { _, _, result ->
                 result.fold({

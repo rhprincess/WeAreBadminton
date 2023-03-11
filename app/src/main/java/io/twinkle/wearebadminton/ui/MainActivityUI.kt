@@ -50,7 +50,7 @@ fun MainActivityUI(activity: MainActivity) {
                         Icon(
                             imageVector = Icons.Filled.Settings,
                             contentDescription = "Settings",
-                            tint = MaterialTheme.colorScheme.onSurface
+                            tint = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     }
                 },
@@ -118,7 +118,7 @@ fun MainActivityUI(activity: MainActivity) {
                                                 val intent = Intent()
                                                 intent.setClass(
                                                     activity,
-                                                    HeadToHeadActivity::class.java
+                                                    HTHActivity::class.java
                                                 )
                                                 activity.startActivity(intent)
                                             }
@@ -127,6 +127,14 @@ fun MainActivityUI(activity: MainActivity) {
                                                 intent.setClass(
                                                     activity,
                                                     PlayersActivity::class.java
+                                                )
+                                                activity.startActivity(intent)
+                                            }
+                                            FunctionListItem.LiveMatch -> {
+                                                val intent = Intent()
+                                                intent.setClass(
+                                                    activity,
+                                                    CurrentLiveActivity::class.java
                                                 )
                                                 activity.startActivity(intent)
                                             }

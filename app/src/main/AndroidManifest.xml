@@ -60,12 +60,22 @@
             android:theme="@style/Theme.WeAreBadminton" />
 
         <activity
-            android:name=".activity.HeadToHeadActivity"
+            android:name=".activity.HTHActivity"
             android:exported="true"
             android:theme="@style/Theme.WeAreBadminton" />
 
         <activity
             android:name=".activity.SettingsActivity"
+            android:exported="true"
+            android:theme="@style/Theme.WeAreBadminton" />
+
+        <activity
+            android:name=".activity.CurrentLiveActivity"
+            android:exported="true"
+            android:theme="@style/Theme.WeAreBadminton" />
+
+        <activity
+            android:name=".activity.LiveMatchActivity"
             android:exported="true"
             android:theme="@style/Theme.WeAreBadminton" />
     </application>

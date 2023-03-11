@@ -1,7 +1,9 @@
 package io.twinkle.wearebadminton.ui.widget
 
+import android.content.Intent
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.os.Build
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -10,10 +12,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Done
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,6 +30,7 @@ import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.decode.SvgDecoder
 import io.twinkle.wearebadminton.R
+import io.twinkle.wearebadminton.activity.HTHActivity
 import io.twinkle.wearebadminton.data.IndonesiaOpen
 import io.twinkle.wearebadminton.data.bean.MatchPreviousResults
 import io.twinkle.wearebadminton.ui.theme.BwfBadmintonTheme
@@ -40,6 +40,7 @@ import io.twinkle.wearebadminton.utilities.BwfApi
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MatchPanel(results: MatchPreviousResults? = null) {
+    val context = LocalContext.current
     val imageLoader = ImageLoader.Builder(
         LocalContext.current
     ).components {
@@ -93,6 +94,42 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                             .align(Alignment.CenterStart),
                         color = MaterialTheme.colorScheme.onPrimaryContainer
                     )
+                }
+                OutlinedIconButton(
+                    onClick = {
+                        val player11: String = results?.t1p1_player_model?.name_display ?: ""
+                        val player12: String = results?.t1p2_player_model?.name_display ?: ""
+                        val player21: String = results?.t2p1_player_model?.name_display ?: ""
+                        val player22: String = results?.t2p2_player_model?.name_display ?: ""
+                        val intent = Intent()
+                        intent.putExtra("p11", player11)
+                        intent.putExtra("p12", player12)
+                        intent.putExtra("p21", player21)
+                        intent.putExtra("p22", player22)
+                        intent.putExtra("transferByName", true)
+                        intent.setClass(context, HTHActivity::class.java)
+                        context.startActivity(intent)
+                    },
+                    modifier = Modifier.width(65.dp),
+                    border = BorderStroke(
+                        1.dp,
+                        MaterialTheme.colorScheme.onSurface.copy(alpha = 0.15f)
+                    )
+                ) {
+                    Row {
+                        Icon(
+                            painter = painterResource(id = R.drawable.compare),
+                            contentDescription = "query h2h data",
+                            modifier = Modifier.size(16.dp),
+                            tint = MaterialTheme.colorScheme.onSurface
+                        )
+                        Spacer(modifier = Modifier.width(5.dp))
+                        Text(
+                            text = "H2H",
+                            fontSize = 12.sp,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
                 }
             }
 
@@ -400,7 +437,7 @@ private fun isWinner(player1Scores: List<Int>, player2Scores: List<Int>): Boolea
     return wons >= 2
 }
 
-private fun convertTime(time: Int): String {
+fun convertTime(time: Int): String {
     val h = time / 60
     val hourMin = h * 60
     val min = time - hourMin

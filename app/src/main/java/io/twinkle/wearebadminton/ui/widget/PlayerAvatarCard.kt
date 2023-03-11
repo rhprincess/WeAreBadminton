@@ -32,9 +32,10 @@ import io.twinkle.wearebadminton.R
 import io.twinkle.wearebadminton.data.bean.PlayerResult
 import io.twinkle.wearebadminton.ui.theme.BwfBadmintonTheme
 import io.twinkle.wearebadminton.ui.viewmodel.PlayersViewModel
+import io.twinkle.wearebadminton.utilities.BwfApi
 
 @Composable
-fun PlayerAvatarCard(
+fun PlayerAvatarCardVertical(
     playersViewModel: PlayersViewModel = viewModel(),
     result: PlayerResult? = null
 ) {
@@ -73,7 +74,7 @@ fun PlayerAvatarCard(
                     .align(Alignment.BottomStart)
             ) {
                 AsyncImage(
-                    model = "https://extranet.bwfbadminton.com/docs/flags-svg/" + result?.country_model?.flag_name_svg,
+                    model = BwfApi.FLAG_URL + result?.country_model?.flag_name_svg,
                     placeholder = painterResource(id = R.drawable.chinesetaipei),
                     contentDescription = "Avatar",
                     modifier = Modifier
@@ -111,10 +112,91 @@ fun PlayerAvatarCard(
     }
 }
 
+@Composable
+fun PlayerAvatarCardHorizontal(result: PlayerResult? = null) {
+    val imageLoader = ImageLoader.Builder(
+        LocalContext.current
+    ).components {
+        add(SvgDecoder.Factory())
+        if (Build.VERSION.SDK_INT >= 28) {
+            add(ImageDecoderDecoder.Factory())
+        } else {
+            add(GifDecoder.Factory())
+        }
+    }.build()
+
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Box(modifier = Modifier.size(48.dp)) {
+            AsyncImage(
+                model = result?.avatar?.url_original,
+                contentDescription = "Avatar",
+                placeholder = painterResource(id = R.drawable.cn),
+                modifier = Modifier
+                    .size(42.dp)
+                    .align(Alignment.Center)
+                    .clip(CircleShape),
+                imageLoader = imageLoader,
+                contentScale = ContentScale.Crop
+            )
+            Box(
+                modifier = Modifier
+                    .size(16.dp)
+                    .align(Alignment.BottomStart)
+            ) {
+                AsyncImage(
+                    model = BwfApi.FLAG_URL + result?.country_model?.flag_name_svg,
+                    placeholder = painterResource(id = R.drawable.chinesetaipei),
+                    contentDescription = "Avatar",
+                    modifier = Modifier
+                        .size(16.dp)
+                        .align(Alignment.Center)
+                        .clip(CircleShape),
+                    imageLoader = imageLoader,
+                    contentScale = ContentScale.Crop
+                )
+            }
+        }
+        Spacer(modifier = Modifier.width(5.dp))
+        val name = result?.name_display
+        Text(
+            text = buildAnnotatedString {
+                name?.split(" ")?.forEach {
+                    if (it == result.last_name) {
+                        withStyle(
+                            style = SpanStyle(
+                                fontWeight = FontWeight.Bold
+                            )
+                        ) {
+                            append("$it ")
+                        }
+                    } else {
+                        append("$it ")
+                    }
+                }
+            },
+            overflow = TextOverflow.Ellipsis,
+            color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier.weight(1f),
+            fontSize = 13.sp
+        )
+    }
+}
+
 @Preview
 @Composable
-fun PlayerAvatarCardPreview() {
+fun PlayerAvatarCardVerticalPreview() {
     BwfBadmintonTheme {
-        PlayerAvatarCard()
+        PlayerAvatarCardVertical()
+    }
+}
+
+@Preview
+@Composable
+fun PlayerAvatarCardHorizontalPreview() {
+    BwfBadmintonTheme {
+        PlayerAvatarCardHorizontal()
     }
 }
