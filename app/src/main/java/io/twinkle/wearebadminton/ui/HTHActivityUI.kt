@@ -89,7 +89,7 @@ fun HTHActivityUI(viewModel: HTHViewModel = viewModel()) {
                                     playerResult = uiState.player11,
                                     viewModel = viewModel
                                 )
-                                Spacer(modifier = Modifier.height(5.dp))
+                                Spacer(modifier = Modifier.height(8.dp))
                                 PlayerAvatar(
                                     order = PlayerOrder.TEAM_ONE_SECOND,
                                     playerResult = uiState.player12,
@@ -113,7 +113,7 @@ fun HTHActivityUI(viewModel: HTHViewModel = viewModel()) {
                                     playerResult = uiState.player21,
                                     viewModel = viewModel
                                 )
-                                Spacer(modifier = Modifier.height(5.dp))
+                                Spacer(modifier = Modifier.height(8.dp))
                                 PlayerAvatar(
                                     order = PlayerOrder.TEAM_TWO_SECOND,
                                     playerResult = uiState.player22,
@@ -284,6 +284,9 @@ fun PlayerAvatar(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .width((screenWidth * 0.35).dp)
+            .border(width = 2.dp, color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.25f), shape = RoundedCornerShape(8.dp))
+            .clip(RoundedCornerShape(8.dp))
+            .padding(5.dp)
             .combinedClickable(
                 onClick = {
                     viewModel.showPlayersDialog(order, true)

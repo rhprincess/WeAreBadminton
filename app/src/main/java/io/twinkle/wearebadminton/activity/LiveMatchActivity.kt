@@ -5,12 +5,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.lifecycleScope
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Headers
 import io.twinkle.wearebadminton.data.bean.LiveMatchesBean
+import io.twinkle.wearebadminton.data.bean.MatchStatBean
 import io.twinkle.wearebadminton.data.payload.LiveMatchesPayload
+import io.twinkle.wearebadminton.data.payload.MatchStatPayload
 import io.twinkle.wearebadminton.ui.LiveMatchActivityUI
 import io.twinkle.wearebadminton.ui.theme.BwfBadmintonTheme
 import io.twinkle.wearebadminton.ui.viewmodel.LiveMatchViewModel
@@ -43,6 +47,7 @@ class LiveMatchActivity : ComponentActivity() {
         }
         setContent {
             BwfBadmintonTheme(theme = theme.value, dynamicColor = dynamicColor.value) {
+                val uiState by model.uiState.collectAsState()
 
                 SideEffect {
                     fetchLiveMatches(tmtId ?: "", tmtType, model)
@@ -52,7 +57,13 @@ class LiveMatchActivity : ComponentActivity() {
                     if (refreshTime == refreshingFrequency.value) {
                         refreshTime = 0
                         fetchLiveMatches(tmtId ?: "", tmtType, model)
-                        println("已刷新")
+                        if (uiState.expandIndex != null) {
+                            fetchMatchStat(
+                                matchId = uiState.currentMatchId ?: 0,
+                                tmtId = uiState.currentTmtId ?: 0,
+                                viewModel = model
+                            )
+                        }
                     } else {
                         refreshTime++
                     }
@@ -76,19 +87,23 @@ class LiveMatchActivity : ComponentActivity() {
             .responseObject(LiveMatchesBean.Deserializer()) { _, _, result ->
                 result.fold({
                     viewModel.updateLiveMatches(it.results)
-//                    if (liveMatchesList.size != it.results.size) {
-//                        liveMatchesList.clear()
-//                        it.results.forEach { live ->
-//                            if (!liveMatchesList.contains(live)) {
-//                                liveMatchesList.add(live)
-//                            }
-//                        }
-//                    } else {
-//                        liveMatchesList.clear()
-//                        it.results.forEachIndexed { index, live ->
-//                            liveMatchesList[index] = live
-//                        }
-//                    }
+                }, {})
+            }
+    }
+
+    private fun fetchMatchStat(
+        matchId: Int,
+        tmtId: Int,
+        viewModel: LiveMatchViewModel
+    ) {
+        viewModel.callRefreshingState()
+        Fuel.post(BwfApi.LIVE_MATCH_STAT)
+            .body(MatchStatPayload(matchId = matchId.toString(), tmtId = tmtId.toString()).toJson())
+            .header(Headers.CONTENT_TYPE, "application/json;charset=UTF-8")
+            .header(Headers.AUTHORIZATION, BwfApi.BWFAPI_AUTHORIZATION)
+            .responseObject(MatchStatBean.Deserializer()) { _, _, result ->
+                result.fold({
+                    viewModel.updateMatchStatResults(it.results)
                 }, {})
             }
     }

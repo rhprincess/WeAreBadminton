@@ -25,13 +25,13 @@ data class LiveSingleResults(
     val t1g1Percent: Int,
     val t1g2Percent: Int,
     val t1g3Percent: Int,
-    val t1p1Detail: T1p1Detail,
-    val t1p2Detail: T1p2Detail,
+    val t1p1Detail: PlayerDetail,
+    val t1p2Detail: PlayerDetail,
     val t2g1Percent: Int,
     val t2g2Percent: Int,
     val t2g3Percent: Int,
-    val t2p1Detail: T2p1Detail,
-    val t2p2Detail: T2p2Detail,
+    val t2p1Detail: PlayerDetail,
+    val t2p2Detail: PlayerDetail,
     val team1_g1_score: Int,
     val team1_g2_score: Any,
     val team1_g3_score: Any,
@@ -45,61 +45,7 @@ data class LiveSingleResults(
     val winner: Int
 )
 
-data class T1p1Detail(
-    val avatar: LiveSingleAvatar,
-    val first_name: String,
-    val fullName: String,
-    val id: Int,
-    val last_name: String,
-    val nameShort: String,
-    val name_display: String,
-    val name_display_bold: String,
-    val name_display_break: String,
-    val name_short1: String,
-    val name_type_id: Int,
-    val nationality: String,
-    val nationality_item: NationalityItem,
-    val playerLink: String,
-    val slug: String
-)
-
-data class T1p2Detail(
-    val avatar: LiveSingleAvatar,
-    val first_name: String,
-    val fullName: String,
-    val id: Int,
-    val last_name: String,
-    val nameShort: String,
-    val name_display: String,
-    val name_display_bold: String,
-    val name_display_break: String,
-    val name_short1: String,
-    val name_type_id: Int,
-    val nationality: String,
-    val nationality_item: NationalityItem,
-    val playerLink: String,
-    val slug: String
-)
-
-data class T2p1Detail(
-    val avatar: LiveSingleAvatar,
-    val first_name: String,
-    val fullName: String,
-    val id: Int,
-    val last_name: String,
-    val nameShort: String,
-    val name_display: String,
-    val name_display_bold: String,
-    val name_display_break: String,
-    val name_short1: String,
-    val name_type_id: Int,
-    val nationality: String,
-    val nationality_item: NationalityItem,
-    val playerLink: String,
-    val slug: String
-)
-
-data class T2p2Detail(
+data class PlayerDetail(
     val avatar: LiveSingleAvatar,
     val first_name: String,
     val fullName: String,
