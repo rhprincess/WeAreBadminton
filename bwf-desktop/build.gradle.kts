@@ -26,6 +26,11 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(compose.desktop.currentOs)
+                implementation("com.github.kittinunf.fuel:fuel:2.3.1")
+                implementation("com.google.code.gson:gson:2.10.1")
+                // Ktor latest 2.2.4
+                implementation("io.ktor:ktor-client-core:1.6.6")
+                implementation("io.ktor:ktor-client-cio:1.6.6")
             }
         }
         val jvmTest by getting
