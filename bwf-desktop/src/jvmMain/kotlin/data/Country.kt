@@ -14,7 +14,7 @@ enum class CountryIcon(val path: String) {
     GERMANY("flags/de.svg"),
     FRANCE("flags/fr.svg"),
     CHINESE_HONGKONG("flags/hk.svg"),
-    CHINESE_TAIPEI("flags/chinese-taipei.svg"),
+    CHINESE_TAIPEI("flags/cn_tpe.svg"),
     CANADA("flags/ca.svg"),
     SINGAPORE("flags/sg.svg"),
     AMERICA("flags/us.svg")

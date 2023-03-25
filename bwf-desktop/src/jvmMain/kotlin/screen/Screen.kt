@@ -9,5 +9,7 @@ enum class Screen {
     PopularPlayersScreen,
     MatchHistoryScreen,
     AllYearMatchesScreen,
-    SettingsScreen
+    SettingsScreen,
+    PlayerProfileScreen,
+    LocalMatchScreen
 }

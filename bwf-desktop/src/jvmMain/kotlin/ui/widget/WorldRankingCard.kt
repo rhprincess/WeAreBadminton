@@ -12,18 +12,23 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.currentRecomposeScope
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import io.twinkle.wearebadminton.data.bean.PlayerData
+import navcontroller.NavController
+import screen.Screen
 import ui.theme.BwfTheme
 import ui.theme.RankDownColor
 import ui.theme.RankUpColor
+import ui.viewmodel.WorldRankingViewModel
 import utilities.BwfApi
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
@@ -32,7 +37,9 @@ import kotlin.math.roundToInt
 fun WorldRankingCard(
     index: Int,
     catId: Int,
-    data: PlayerData
+    data: PlayerData,
+    navController: NavController,
+    viewModel: WorldRankingViewModel
 ) {
     val density = LocalDensity.current
     Column(
@@ -45,7 +52,17 @@ fun WorldRankingCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .defaultMinSize(minHeight = 55.dp)
-                .clickable {}
+                .clickable {
+                    viewModel.setRankIndex(index)
+                    if (data.player2_model != null) {
+                        viewModel.showPlayerChoices(true)
+                    } else {
+                        val bundle = NavController.ScreenBundle()
+                        bundle.strings["playerId"] = data.player1_model.id.toString()
+                        bundle.ints["catId"] = catId
+                        navController.navigate(Screen.PlayerProfileScreen.name, bundle)
+                    }
+                }
         ) {
             // Rank
             Box(modifier = Modifier.size(55.dp)) {
@@ -125,9 +142,10 @@ fun WorldRankingCard(
                         density = density
                     )
                 },
-                painterFor = { painter ?: it },
+                imageFor = { painter ?: it },
                 contentDescription = "nation",
-                imageTransformation = ImageTransformation.Circle
+                imageTransformation = ImageTransformation.Circle,
+                contentScale = ContentScale.Crop
             )
             // Tournaments
             Box(

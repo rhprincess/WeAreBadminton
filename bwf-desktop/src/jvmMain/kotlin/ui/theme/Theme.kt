@@ -17,6 +17,13 @@ object Theme {
     fun get(theme: Int): BaseTheme {
         return when (theme) {
             DEFAULT_THEME -> DefaultTheme
+            AUTUMN_LIKE_THEME -> AutumnLikeTheme
+            OCEAN_LIKE_THEME -> OceanLikeTheme
+            SUMMER_LIKE_THEME -> SummerLikeTheme
+            PINKKA_THEME -> PinkKaTheme
+            MINT_THEME -> MintTheme
+            ORANGE_THEME -> OrangeTheme
+            PURE_ANDROID_THEME -> PureAndroidTheme
             else -> DefaultTheme
         }
     }

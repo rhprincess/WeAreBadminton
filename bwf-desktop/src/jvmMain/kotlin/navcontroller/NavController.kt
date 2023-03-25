@@ -7,6 +7,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 
 /**
  * NavController Class
+ *
+ * this generic T is used to define what type of the ScreenBundle is.
+ * you can use navigate(route: String, bundle: MutableState<T>) and getCurrentBundle function to pass data through screens
  */
 class NavController(
     private val startDestination: String,
@@ -14,6 +17,16 @@ class NavController(
 ) {
     // Variable to store the state of the current screen
     var currentScreen: MutableState<String> = mutableStateOf(startDestination)
+    var screenBundle = ScreenBundle()
+
+    class ScreenBundle {
+        val strings: HashMap<String,String> = hashMapOf()
+        val booleans: HashMap<String,Boolean> = hashMapOf()
+        val ints: HashMap<String,Int> = hashMapOf()
+        val floats: HashMap<String,Float> = hashMapOf()
+        val longs: HashMap<String,Long> = hashMapOf()
+        val doubles: HashMap<String,Double> = hashMapOf()
+    }
 
     // Function to handle the navigation between the screen
     fun navigate(route: String) {
@@ -32,6 +45,11 @@ class NavController(
             // switch to current screen
             currentScreen.value = route
         }
+    }
+
+    fun navigate(route: String, bundle: ScreenBundle) {
+        this.screenBundle = bundle
+        navigate(route)
     }
 
     // Function to handle the back

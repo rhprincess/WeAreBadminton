@@ -31,6 +31,7 @@ kotlin {
                 // Ktor latest 2.2.4
                 implementation("io.ktor:ktor-client-core:1.6.6")
                 implementation("io.ktor:ktor-client-cio:1.6.6")
+                implementation("androidx.datastore:datastore-preferences-core:1.1.0-dev01")
             }
         }
         val jvmTest by getting

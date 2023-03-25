@@ -26,11 +26,14 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogState
 import io.twinkle.wearebadminton.ui.widget.TextTitle
+import kotlinx.coroutines.launch
 import navcontroller.NavController
 import navcontroller.rememberNavController
 import ui.theme.BwfTheme
 import ui.theme.Theme
 import ui.widget.SettingsItem
+import utilities.Constants
+import utilities.DataStoreUtils
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -41,6 +44,14 @@ fun SettingsScreen(navController: NavController) {
     val refreshingFrequency = remember { mutableStateOf(10) }
     var showBreakingDown by remember { mutableStateOf(true) }
     var dark by remember { mutableStateOf(true) }
+    val scope = rememberCoroutineScope()
+    LaunchedEffect(key1 = Unit) {
+        theme.value = DataStoreUtils.readIntData(Constants.KEY_THEME)
+        previousSizeCount.value = DataStoreUtils.readIntData(Constants.KEY_MATCH_PREVIOUS_SIZE, 4)
+        worldRankPerPage.value = DataStoreUtils.readIntData(Constants.WORLD_RANKING_COUNT_PER_PAGE, 100)
+        refreshingFrequency.value = DataStoreUtils.readIntData(Constants.KEY_LIVE_MATCH_REFRESHING_FREQUENCY, 5)
+        showBreakingDown = DataStoreUtils.readBooleanData(Constants.KEY_SHOW_BREAKING_DOWN, true)
+    }
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colors.surface),
         topBar = {
@@ -101,9 +112,6 @@ fun SettingsScreen(navController: NavController) {
                             .padding(horizontal = 12.dp),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        item {
-
-                        }
                         items(Theme.THEME_SIZE) {
                             Box(
                                 modifier = Modifier
@@ -118,6 +126,9 @@ fun SettingsScreen(navController: NavController) {
                                     )
                                     .clickable {
                                         theme.value = it
+                                        scope.launch {
+                                            DataStoreUtils.putData(Constants.KEY_THEME, it)
+                                        }
                                     }
                             ) {
                                 Icon(
@@ -187,6 +198,9 @@ fun SettingsScreen(navController: NavController) {
                                         .clickable {
                                             previousSizeCount.value = it
                                             previousCountDialog = false
+                                            scope.launch {
+                                                DataStoreUtils.putData(Constants.KEY_MATCH_PREVIOUS_SIZE, it)
+                                            }
                                         }) {
                                         Row(
                                             verticalAlignment = Alignment.CenterVertically,
@@ -198,6 +212,9 @@ fun SettingsScreen(navController: NavController) {
                                                 selected = it == previousSizeCount.value,
                                                 onClick = {
                                                     previousSizeCount.value = it
+                                                    scope.launch {
+                                                        DataStoreUtils.putData(Constants.KEY_MATCH_PREVIOUS_SIZE, it)
+                                                    }
                                                 }
                                             )
                                             Spacer(modifier = Modifier.width(5.dp))
@@ -267,6 +284,9 @@ fun SettingsScreen(navController: NavController) {
                                         .clickable {
                                             worldRankPerPage.value = it
                                             worldRankingPageDialog = false
+                                            scope.launch {
+                                                DataStoreUtils.putData(Constants.WORLD_RANKING_COUNT_PER_PAGE, it)
+                                            }
                                         }) {
                                         Row(
                                             verticalAlignment = Alignment.CenterVertically,
@@ -278,6 +298,12 @@ fun SettingsScreen(navController: NavController) {
                                                 selected = it == worldRankPerPage.value,
                                                 onClick = {
                                                     worldRankPerPage.value = it
+                                                    scope.launch {
+                                                        DataStoreUtils.putData(
+                                                            Constants.WORLD_RANKING_COUNT_PER_PAGE,
+                                                            it
+                                                        )
+                                                    }
                                                 }
                                             )
                                             Spacer(modifier = Modifier.width(5.dp))
@@ -312,11 +338,17 @@ fun SettingsScreen(navController: NavController) {
                             checked = showBreakingDown,
                             onCheckedChange = {
                                 showBreakingDown = it
+                                scope.launch {
+                                    DataStoreUtils.putData(Constants.KEY_SHOW_BREAKING_DOWN, it)
+                                }
                             }
                         )
                     },
                     onClick = {
                         showBreakingDown = !showBreakingDown
+                        scope.launch {
+                            DataStoreUtils.putData(Constants.KEY_SHOW_BREAKING_DOWN, !showBreakingDown)
+                        }
                     }
                 )
 
@@ -372,6 +404,12 @@ fun SettingsScreen(navController: NavController) {
                                         .clickable {
                                             refreshingFrequency.value = it
                                             liveMatchRefreshFrequencyDialog = false
+                                            scope.launch {
+                                                DataStoreUtils.putData(
+                                                    Constants.KEY_LIVE_MATCH_REFRESHING_FREQUENCY,
+                                                    it
+                                                )
+                                            }
                                         }) {
                                         Row(
                                             verticalAlignment = Alignment.CenterVertically,
@@ -383,6 +421,12 @@ fun SettingsScreen(navController: NavController) {
                                                 selected = it == refreshingFrequency.value,
                                                 onClick = {
                                                     refreshingFrequency.value = it
+                                                    scope.launch {
+                                                        DataStoreUtils.putData(
+                                                            Constants.KEY_LIVE_MATCH_REFRESHING_FREQUENCY,
+                                                            it
+                                                        )
+                                                    }
                                                 }
                                             )
                                             Spacer(modifier = Modifier.width(5.dp))

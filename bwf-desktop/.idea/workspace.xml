@@ -4,332 +4,271 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6061c558-14c9-4ec9-ac6d-1fe547366179" name="变更" comment="desktop support">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/Country.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/CourtFieldData.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/FunctionListItem.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/Game.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/MatchData.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/PlayerOrder.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/Round.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/ServiceDirection.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/Tournaments.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/bean/BreakingDownBean.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/bean/CurrentLiveBean.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/bean/CurrentRankBean.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/bean/HeadToHeadBean.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/bean/LiveMatchesBean.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/bean/LiveSingleBean.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/bean/MatchPreviousBean.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/bean/MatchStatBean.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/bean/PlayerGalleryBean.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/bean/PlayerProfileBean.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/bean/PopularPlayersBean.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/bean/RankingBean.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/payload/CurrentRankPayload.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/payload/HeadToHeadPayload.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/payload/LiveMatchesPayload.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/payload/LiveSinglePayload.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/payload/MatchPreviousPayload.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/payload/MatchStatPayload.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/payload/Payload.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/payload/PlayerGalleryPayload.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/payload/PlayerSearchPayload.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/payload/PlayerSummaryPayload.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/payload/RankPayload.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/payload/RankingEventsPayload.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/navcontroller/NavController.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/navcontroller/NavigationHost.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/MainScreen.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/Screen.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/SettingsScreen.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/WorldRankingScreen.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/BaseTheme.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/Color.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/DeafultTheme.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/Theme.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/uistate/WorldRankingUiState.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/viewmodel/WorldRankingViewModel.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/AsyncImage.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/FunctionListCard.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/SettingsItem.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/TextTitle.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/WorldRankingCard.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/utilities/BwfApi.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ac.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ad.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ae.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/af.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ag.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ai.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/al.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/am.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ao.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/aq.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ar.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/as.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/at.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/au.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/aw.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ax.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/az.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ba.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/bb.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/bd.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/be.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/bf.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/bg.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/bh.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/bi.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/bj.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/bl.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/bm.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/bn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/bo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/bq.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/br.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/bs.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/bt.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/bv.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/bw.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/by.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/bz.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ca.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/cc.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/cd.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/cefta.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/cf.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/cg.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ch.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/chinese-taipei.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ci.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ck.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/cl.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/cm.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/cn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/co.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/cp.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/cr.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/cu.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/cv.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/cw.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/cx.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/cy.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/cz.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/de.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/dg.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/dj.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/dk.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/dm.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/do.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/dz.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ea.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ec.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ee.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/eg.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/eh.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/er.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/es-ct.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/es-ga.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/es-pv.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/es.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/et.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/eu.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/fi.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/fj.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/fk.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/fm.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/fo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/fr.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ga.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gb-eng.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gb-nir.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gb-sct.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gb-wls.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gb.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gd.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ge.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gf.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gg.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gh.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gi.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gl.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gm.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gp.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gq.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gr.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gs.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gt.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gu.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gw.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/gy.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/hk.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/hm.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/hn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/hr.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ht.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/hu.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ic.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/id.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ie.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/il.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/im.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/in.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/io.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/iq.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ir.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/is.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/it.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/je.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/jm.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/jo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/jp.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ke.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/kg.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/kh.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ki.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/km.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/kn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/kp.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/kr.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/kw.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ky.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/kz.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/la.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/lb.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/lc.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/li.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/lk.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/lr.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ls.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/lt.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/lu.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/lv.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ly.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ma.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/mc.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/md.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/me.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/mf.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/mg.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/mh.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/mk.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ml.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/mm.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/mn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/mo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/mp.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/mq.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/mr.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ms.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/mt.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/mu.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/mv.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/mw.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/mx.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/my.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/mz.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/na.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/nc.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ne.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/nf.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ng.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ni.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/nl.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/no.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/np.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/nr.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/nu.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/nz.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/om.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/pa.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/pe.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/pf.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/pg.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ph.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/pk.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/pl.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/pm.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/pn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/pr.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ps.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/pt.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/pw.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/py.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/qa.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/re.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ro.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/rs.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ru.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/rw.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/sa.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/sb.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/sc.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/sd.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/se.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/sg.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/sh.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/si.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/sj.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/sk.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/sl.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/sm.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/sn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/so.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/sr.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ss.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/st.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/sv.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/sx.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/sy.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/sz.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ta.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/tc.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/td.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/tf.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/tg.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/th.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/tj.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/tk.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/tl.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/tm.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/tn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/to.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/tr.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/tt.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/tv.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/tz.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ua.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ug.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/um.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/un.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/us.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/uy.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/uz.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/va.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/vc.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ve.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/vg.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/vi.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/vn.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/vu.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/wf.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ws.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/xk.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/xx.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/ye.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/yt.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/za.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/zm.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/zw.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/svg/logo-bwf-rgb.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="6061c558-14c9-4ec9-ac6d-1fe547366179" name="变更" comment="update world ranking for desktop">
+      <change afterPath="$PROJECT_DIR$/bwf.preferences_pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/LocalMatchScreen.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/PlayerProfileScreen.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/AutumnLikeTheme.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/MintTheme.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/OceanLikeTheme.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/OrangeTheme.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/PinkKaTheme.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/PureAndroidTheme.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/SummerLikeTheme.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/uistate/LocalMatchUiState.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/uistate/PlayerProfileUiState.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/viewmodel/LocalMatchViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/viewmodel/PlayerProfileViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/AnimatedCounter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/BreakingDownCard.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/CourtField.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/GalleryItem.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/LiveScoreBoard.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/MatchPanel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/PlayerInfoItem.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/utilities/CompostionLocalUtil.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/utilities/Constants.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/utilities/DataStoreUtils.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/utilities/Extensions.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/utilities/createDataStore.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/cn_tpe.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/icons/remove.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/LICENSE.TXT" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/LuxTasks.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/Microsoft.Deployment.Compression.Cab.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/Microsoft.Deployment.Compression.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/Microsoft.Deployment.Resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/Microsoft.Deployment.WindowsInstaller.Package.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/Microsoft.Deployment.WindowsInstaller.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/ThmViewer.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixBalExtension.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixComPlusExtension.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixCop.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixDependencyExtension.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixDifxAppExtension.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixDirectXExtension.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixFirewallExtension.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixGamingExtension.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixHttpExtension.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixIIsExtension.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixLuxExtension.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixMsmqExtension.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixNetFxExtension.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixPSExtension.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixSqlExtension.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixTagExtension.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixTasks.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixUIExtension.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixUtilExtension.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixVSExtension.MSBuild12.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixVSExtension.MSBuild14.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/WixVSExtension.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/candle.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/candle.exe.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/darice.cub" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/dark.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/dark.exe.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/difxapp_x64.wixlib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/difxapp_x86.wixlib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/DTF.chm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/DTFAPI.chm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/Dependency.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/WiX.chm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/bal.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/complus.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/difxapp.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/firewall.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/gaming.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/http.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/iis.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/lux.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/msmq.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/netfx.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/ps.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/sql.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/tag.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/thmutil.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/util.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/vs.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/wix.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/doc/wixloc.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/heat.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/heat.exe.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/insignia.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/insignia.exe.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/light.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/light.exe.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/lit.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/lit.exe.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/lux.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/lux.exe.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/lux.targets" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/melt.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/melt.exe.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/mergemod.cub" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/mergemod.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/mspatchc.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/nit.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/nit.exe.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/pyro.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/pyro.exe.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/retina.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/retina.exe.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/BootstrapperCore.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/BootstrapperCore.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/BootstrapperCore.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/DocCompiler.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/MakeSfxCA.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/MakeSfxCA.exe.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/Microsoft.Deployment.Compression.Cab.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/Microsoft.Deployment.Compression.Cab.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/Microsoft.Deployment.Compression.Zip.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/Microsoft.Deployment.Compression.Zip.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/Microsoft.Deployment.Compression.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/Microsoft.Deployment.Compression.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/Microsoft.Deployment.Resources.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/Microsoft.Deployment.Resources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/Microsoft.Deployment.WindowsInstaller.Linq.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/Microsoft.Deployment.WindowsInstaller.Linq.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/Microsoft.Deployment.WindowsInstaller.Package.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/Microsoft.Deployment.WindowsInstaller.Package.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/Microsoft.Deployment.WindowsInstaller.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/Microsoft.Deployment.WindowsInstaller.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/MsgGen.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/XsdGen.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/XsdStitch.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/BalBaseBootstrapperApplication.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/IBootstrapperApplication.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/IBootstrapperBAFunction.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/IBootstrapperEngine.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/aclutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/apputil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/apuputil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/atomutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/balcondition.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/balinfo.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/balretry.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/balutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/buffutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/butil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/cabcutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/cabutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/certutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/conutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/cryputil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/custommsierrors.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/deputil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/dictutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/dirutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/dlutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/dutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/eseutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/fileutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/gdiputil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/iis7util.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/inetutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/iniutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/jsonutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/locutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/logutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/memutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/metautil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/osutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/pathutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/perfutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/polcutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/procutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/regutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/resrutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/reswutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/rexutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/rmutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/rssutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/sceutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/shelutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/sqlutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/srputil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/strutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/svcutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/thmutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/timeutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/uriutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/userutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/wcalog.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/wcautil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/wcawow64.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/wcawrapquery.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/wiutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/wuautil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/inc/xmlutil.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2010/lib/x64/deputil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2010/lib/x64/dutil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2010/lib/x64/wcautil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2010/lib/x86/balutil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2010/lib/x86/deputil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2010/lib/x86/dutil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2010/lib/x86/wcautil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2012/lib/x64/deputil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2012/lib/x64/dutil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2012/lib/x64/wcautil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2012/lib/x86/balutil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2012/lib/x86/deputil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2012/lib/x86/dutil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2012/lib/x86/wcautil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2013/lib/x64/deputil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2013/lib/x64/dutil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2013/lib/x64/wcautil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2013/lib/x86/balutil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2013/lib/x86/deputil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2013/lib/x86/dutil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2013/lib/x86/wcautil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2015/lib/x64/deputil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2015/lib/x64/dutil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2015/lib/x64/wcautil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2015/lib/x86/balutil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2015/lib/x86/deputil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2015/lib/x86/dutil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2015/lib/x86/wcautil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2017/lib/x64/deputil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2017/lib/x64/dutil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2017/lib/x64/wcautil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2017/lib/x86/balutil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2017/lib/x86/deputil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2017/lib/x86/dutil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/vs2017/lib/x86/wcautil.lib" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/wix.ca.targets" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/wix.nativeca.targets" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/x64/sfxca.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/sdk/x86/sfxca.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/shine.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/shine.exe.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/smoke.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/smoke.exe.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/torch.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/torch.exe.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/wconsole.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/winterop.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/wix.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/wix.targets" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/wix200x.targets" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/wix2010.targets" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wix311/x86/burn.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/Main.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/data/Country.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/Country.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/navcontroller/NavController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/navcontroller/NavController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/MainScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/MainScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/Screen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/Screen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/SettingsScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/SettingsScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/WorldRankingScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/WorldRankingScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/DeafultTheme.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/DeafultTheme.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/Theme.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/Theme.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/AsyncImage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/AsyncImage.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/WorldRankingCard.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/WorldRankingCard.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jvmMain/resources/flags/chinese-taipei.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/resources/flags/cn_tpe.svg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -344,9 +283,28 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="bwf-desktop" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="bwf-desktop" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="bwf-desktop" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="compose desktop" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -357,6 +315,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Kotlin Enum" />
+        <option value="Kotlin Class" />
+        <option value="Kotlin Object" />
         <option value="Kotlin File" />
       </list>
     </option>
@@ -364,7 +324,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="KotlinMultiplatform" KONAN_HOME="C:\Users\walke\.konan\kotlin-native-prebuilt-windows-x86_64-1.6.10" />
+  <component name="KotlinMultiplatform" KONAN_HOME="C:\Users\walke\.konan\kotlin-native-prebuilt-windows-x86_64-1.8.10" />
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -376,37 +336,101 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/walke/AndroidStudioProjects/WeAreBadminton/bwf-desktop/src/jvmMain/kotlin/ui/uistate&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.31225297&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Kotlin&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/walke/AndroidStudioProjects/WeAreBadminton/bwf-desktop/src/jvmMain/kotlin/ui/widget",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.31225297",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\walke\AndroidStudioProjects\WeAreBadminton\bwf-desktop\src\jvmMain\kotlin\ui\widget" />
       <recent name="C:\Users\walke\AndroidStudioProjects\WeAreBadminton\bwf-desktop\src\jvmMain\kotlin\ui\uistate" />
       <recent name="C:\Users\walke\AndroidStudioProjects\WeAreBadminton\bwf-desktop\src\jvmMain\kotlin\ui\viewmodel" />
-      <recent name="C:\Users\walke\AndroidStudioProjects\WeAreBadminton\bwf-desktop\src\jvmMain\kotlin" />
       <recent name="C:\Users\walke\AndroidStudioProjects\WeAreBadminton\bwf-desktop\src\jvmMain\kotlin\ui\theme" />
-      <recent name="C:\Users\walke\AndroidStudioProjects\WeAreBadminton\bwf-desktop\src\jvmMain\kotlin\ui\widget" />
+      <recent name="C:\Users\walke\AndroidStudioProjects\WeAreBadminton\bwf-desktop\src\jvmMain\kotlin\utilities" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\walke\AndroidStudioProjects\WeAreBadminton\bwf-desktop\src\jvmMain\resources\flags" />
       <recent name="C:\Users\walke\AndroidStudioProjects\WeAreBadminton\bwf-desktop\src\jvmMain\resources\svg" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.bwf-desktop [runRelease]">
+    <configuration name="bwf-desktop [packageReleaseMsi]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="packageReleaseMsi" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="bwf-desktop [runDistributable]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="runDistributable" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="bwf-desktop [runRelease]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="runRelease" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="MainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MainKt" />
       <module name="bwf-desktop.jvmMain" />
@@ -426,6 +450,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.bwf-desktop [runRelease]" />
+        <item itemvalue="Gradle.bwf-desktop [packageReleaseMsi]" />
+        <item itemvalue="Gradle.bwf-desktop [runDistributable]" />
         <item itemvalue="Kotlin.MainKt" />
       </list>
     </recent_temporary>
@@ -445,7 +472,11 @@
       <workItem from="1679500242358" duration="4132000" />
       <workItem from="1679538264963" duration="8948000" />
       <workItem from="1679561651548" duration="8413000" />
-      <workItem from="1679583676750" duration="6795000" />
+      <workItem from="1679583676750" duration="7011000" />
+      <workItem from="1679633604471" duration="15220000" />
+      <workItem from="1679720571412" duration="4042000" />
+      <workItem from="1679727257452" duration="5324000" />
+      <workItem from="1679742301917" duration="15920000" />
     </task>
     <task id="LOCAL-00001" summary="desktop support">
       <created>1679410709351</created>
@@ -461,7 +492,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679410731371</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="update world ranking for desktop">
+      <created>1679591894860</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1679591894860</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -481,7 +519,8 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="desktop support" />
-    <option name="LAST_COMMIT_MESSAGE" value="desktop support" />
+    <MESSAGE value="update world ranking for desktop" />
+    <option name="LAST_COMMIT_MESSAGE" value="update world ranking for desktop" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

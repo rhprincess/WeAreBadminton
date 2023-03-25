@@ -3,11 +3,12 @@ package screen
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -16,20 +17,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogState
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Headers
 import com.google.gson.Gson
 import io.twinkle.wearebadminton.data.bean.RankingBean
-import utilities.BwfApi
+import io.twinkle.wearebadminton.ui.widget.TextTitle
 import navcontroller.NavController
 import navcontroller.rememberNavController
 import ui.theme.BwfTheme
 import ui.viewmodel.WorldRankingViewModel
-import ui.widget.WorldRankingCard
-import ui.widget.WorldRankingCardPlacement
+import ui.widget.*
+import utilities.BwfApi
+import utilities.Constants
+import utilities.DataStoreUtils
 
 @Composable
 fun WorldRankingScreen(
@@ -44,9 +52,10 @@ fun WorldRankingScreen(
             worldRankingViewModel.setLoading(false)
             worldRankingViewModel.finishLoadingAnimation(true)
         })
+    val perPageKey = DataStoreUtils.readIntData(Constants.WORLD_RANKING_COUNT_PER_PAGE)
     // Side-load the ranking table
     if (uiState.isLoading) {
-        RefreshRanking(perPageKey = 100, worldRankingViewModel = worldRankingViewModel)
+        RefreshRanking(perPageKey = perPageKey, worldRankingViewModel = worldRankingViewModel)
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -80,7 +89,8 @@ fun WorldRankingScreen(
             content = { innerPadding ->
                 WorldRankingContent(
                     innerPadding = innerPadding,
-                    worldRankingViewModel = worldRankingViewModel
+                    worldRankingViewModel = worldRankingViewModel,
+                    navController = navController
                 )
             }
         )
@@ -112,10 +122,12 @@ fun WorldRankingScreen(
 
 @Composable
 fun WorldRankingContent(
+    navController: NavController,
     worldRankingViewModel: WorldRankingViewModel = WorldRankingViewModel.viewModel(),
     innerPadding: PaddingValues = PaddingValues(0.dp)
 ) {
     val uiState by worldRankingViewModel.uiState.collectAsState()
+    val density = LocalDensity.current
     val rankJson = uiState.rankJson
     SideEffect {
         worldRankingViewModel.updateRankingBean(
@@ -145,111 +157,122 @@ fun WorldRankingContent(
         // 项目介绍
         WorldRankingCardPlacement()
 
-        // 排名列表
-        LazyColumn(
-            contentPadding = PaddingValues(0.dp),
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            if (uiState.bean != null) {
-                val list = uiState.bean!!.results.data
-                items(list.size) {
-                    WorldRankingCard(
-                        data = list[it],
-                        index = it,
-                        catId = tabIndex + 6
-                    )
+        Row {
+            val lazyListState = rememberLazyListState()
+            val adapter = rememberScrollbarAdapter(lazyListState)
+            // 排名列表
+            LazyColumn(
+                contentPadding = PaddingValues(0.dp),
+                modifier = Modifier.weight(1f),
+                state = lazyListState
+            ) {
+                if (uiState.bean != null) {
+                    val list = uiState.bean!!.results.data
+                    items(list.size) {
+                        WorldRankingCard(
+                            data = list[it],
+                            index = it,
+                            catId = tabIndex + 6,
+                            viewModel = worldRankingViewModel,
+                            navController = navController
+                        )
+                    }
+                }
+            }
+            VerticalScrollbar(
+                adapter = adapter,
+                modifier = Modifier.fillMaxHeight(),
+                style = LocalScrollbarStyle.current.copy(
+                    hoverColor = MaterialTheme.colors.primary,
+                    unhoverColor = MaterialTheme.colors.primary.copy(alpha = 0.15f)
+                )
+            )
+        }
+
+        if (uiState.showPlayerChoices) {
+            Dialog(
+                onCloseRequest = { worldRankingViewModel.showPlayerChoices(false) },
+                state = DialogState(width = 375.dp, height = 225.dp),
+                resizable = false,
+                title = "请选择一位球员",
+                icon = painterResource("svg/logo-bwf-rgb.svg")
+            ) {
+                Column(
+                    modifier = Modifier
+                        .background(
+                            MaterialTheme.colors.background,
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                ) {
+                    val list = uiState.bean!!.results.data
+                    TextTitle(title = "请选择一位球员", style = MaterialTheme.typography.body1)
+
+                    OutlinedButton(
+                        onClick = {
+                            val bundle = NavController.ScreenBundle()
+                            bundle.strings["playerId"] = list[uiState.rankIndex].player1_id.toString()
+                            bundle.ints["catId"] = tabIndex + 6
+                            worldRankingViewModel.showPlayerChoices(false)
+                            navController.navigate(Screen.PlayerProfileScreen.name, bundle)
+                        },
+                        shape = RoundedCornerShape(16.dp),
+                        modifier = Modifier.padding(start = 16.dp),
+                    ) {
+                        val flag = list[uiState.rankIndex].player1_model.country_model.flag_name_svg
+                        val painter = handleNationIcon(flag)
+                        AsyncImage(
+                            modifier = Modifier
+                                .size(32.dp)
+                                .padding(3.dp),
+                            load = {
+                                loadSvgPainter(
+                                    url = BwfApi.FLAG_URL + flag,
+                                    density = density
+                                )
+                            },
+                            imageFor = { painter ?: it },
+                            contentDescription = "nation",
+                            imageTransformation = ImageTransformation.Circle,
+                            contentScale = ContentScale.Crop
+                        )
+                        Text(text = list[uiState.rankIndex].player1_model.name_display)
+                    }
+
+                    Spacer(Modifier.height(5.dp))
+
+                    OutlinedButton(
+                        onClick = {
+                            val bundle = NavController.ScreenBundle()
+                            bundle.strings["playerId"] = list[uiState.rankIndex].player2_id.toString()
+                            bundle.ints["catId"] = tabIndex + 6
+                            worldRankingViewModel.showPlayerChoices(false)
+                            navController.navigate(Screen.PlayerProfileScreen.name, bundle)
+                        },
+                        shape = RoundedCornerShape(16.dp),
+                        modifier = Modifier.padding(start = 16.dp, bottom = 16.dp),
+                    ) {
+                        val flag = list[uiState.rankIndex].player2_model!!.country_model.flag_name_svg
+                        val painter = handleNationIcon(flag)
+                        AsyncImage(
+                            modifier = Modifier
+                                .size(32.dp)
+                                .padding(3.dp),
+                            load = {
+                                loadSvgPainter(
+                                    url = BwfApi.FLAG_URL + flag,
+                                    density = density
+                                )
+                            },
+                            imageFor = { painter ?: it },
+                            contentDescription = "nation",
+                            imageTransformation = ImageTransformation.Circle,
+                            contentScale = ContentScale.Crop
+                        )
+                        Text(text = list[uiState.rankIndex].player2_model!!.name_display)
+                    }
                 }
             }
         }
-
-//        if (uiState.showPlayerChoices) {
-//            Dialog(
-//                onCloseRequest = { worldRankingViewModel.showPlayerChoices(false) },
-//            ) {
-//                Column(
-//                    modifier = Modifier
-//                        .background(
-//                            MaterialTheme.colors.background,
-//                            shape = RoundedCornerShape(8.dp)
-//                        )
-//                ) {
-//                    val list = uiState.bean!!.results.data
-//                    TextTitle(title = "请选择一位球员", style = MaterialTheme.typography.body1)
-//
-//                    SuggestionChip(
-//                        onClick = {
-//                            val intent = Intent()
-//                            intent.putExtra("playerId", list[uiState.rankIndex].player1_id)
-//                            intent.putExtra("catId", tabIndex + 6)
-//                            intent.setClass(
-//                                context,
-//                                PlayerProfileActivity::class.java
-//                            )
-//                            context.startActivity(intent)
-//                            worldRankingViewModel.showPlayerChoices(false)
-//                        },
-//                        shape = RoundedCornerShape(16.dp),
-//                        modifier = Modifier.padding(start = 16.dp),
-//                        label = {
-//                            Text(text = list[uiState.rankIndex].player1_model.name_display)
-//                        },
-//                        icon = {
-//                            AsyncImage(
-//                                model = BwfApi.FLAG_URL + list[uiState.rankIndex].player1_model.country_model.flag_name_svg,
-//                                contentDescription = "player1 nation flag",
-//                                modifier = Modifier.size(25.dp),
-//                                imageLoader = ImageLoader.Builder(
-//                                    LocalContext.current
-//                                ).components {
-//                                    add(SvgDecoder.Factory())
-//                                    if (Build.VERSION.SDK_INT >= 28) {
-//                                        add(ImageDecoderDecoder.Factory())
-//                                    } else {
-//                                        add(GifDecoder.Factory())
-//                                    }
-//                                }.build()
-//                            )
-//                        }
-//                    )
-//
-//                    SuggestionChip(
-//                        onClick = {
-//                            val intent = Intent()
-//                            intent.putExtra("playerId", list[uiState.rankIndex].player2_id)
-//                            intent.putExtra("catId", tabIndex + 6)
-//                            intent.setClass(
-//                                context,
-//                                PlayerProfileActivity::class.java
-//                            )
-//                            context.startActivity(intent)
-//                            worldRankingViewModel.showPlayerChoices(false)
-//                        },
-//                        shape = RoundedCornerShape(16.dp),
-//                        modifier = Modifier.padding(start = 16.dp, bottom = 16.dp),
-//                        label = {
-//                            Text(text = list[uiState.rankIndex].player2_model!!.name_display)
-//                        },
-//                        icon = {
-//                            AsyncImage(
-//                                model = BwfApi.FLAG_URL + list[uiState.rankIndex].player2_model!!.country_model.flag_name_svg,
-//                                contentDescription = "player2 nation flag",
-//                                modifier = Modifier.size(25.dp),
-//                                imageLoader = ImageLoader.Builder(
-//                                    LocalContext.current
-//                                ).components {
-//                                    add(SvgDecoder.Factory())
-//                                    if (Build.VERSION.SDK_INT >= 28) {
-//                                        add(ImageDecoderDecoder.Factory())
-//                                    } else {
-//                                        add(GifDecoder.Factory())
-//                                    }
-//                                }.build()
-//                            )
-//                        }
-//                    )
-//                }
-//            }
-//        }
 
     }
 }

@@ -4,15 +4,14 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -60,11 +59,11 @@ fun MainScreen(navController: NavController) {
                     .fillMaxSize()
             ) {
                 LazyVerticalGrid(
-                    cells = GridCells.Fixed(2),
+                    columns = GridCells.Fixed(2),
                     contentPadding = PaddingValues(5.dp, 5.dp),
                     verticalArrangement = Arrangement.spacedBy(5.dp)
                 ) {
-                    items(items = FunctionListItem.values()) {
+                    items(FunctionListItem.values()) {
                         Box(Modifier.padding(5.dp)) {
                             FunctionListCard(
                                 title = it.title,
@@ -72,9 +71,12 @@ fun MainScreen(navController: NavController) {
                                     .clip(RoundedCornerShape(8.dp))
                                     .align(Alignment.Center)
                                     .clickable {
-                                        when(it) {
+                                        when (it) {
                                             FunctionListItem.WorldRanking -> {
                                                 navController.navigate(Screen.WorldRankingScreen.name)
+                                            }
+                                            FunctionListItem.NewMatch -> {
+                                                navController.navigate(Screen.LocalMatchScreen.name)
                                             }
                                             else -> {}
                                         }

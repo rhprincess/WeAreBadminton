@@ -1,6 +1,8 @@
 package ui.theme
 
 import androidx.compose.material.Colors
+import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
 import androidx.compose.ui.graphics.Color
 
 object DefaultTheme : BaseTheme {
@@ -33,7 +35,7 @@ object DefaultTheme : BaseTheme {
     private val md_theme_dark_surface = Color(0xFF201A19)
     private val md_theme_dark_onSurface = Color(0xFFEDE0DE)
 
-    override val lightColors = Colors(
+    override val lightColors = lightColors(
         primary = md_theme_light_primary,
         onPrimary = md_theme_light_onPrimary,
         secondary = md_theme_light_secondary,
@@ -45,12 +47,11 @@ object DefaultTheme : BaseTheme {
         surface = md_theme_light_surface,
         onSurface = md_theme_light_onSurface,
         primaryVariant = md_theme_light_primaryVariant,
-        secondaryVariant = md_theme_light_secondaryVariant,
-        isLight = true
+        secondaryVariant = md_theme_light_secondaryVariant
     )
 
 
-    override val darkColors = Colors(
+    override val darkColors = darkColors(
         primary = md_theme_dark_primary,
         onPrimary = md_theme_dark_onPrimary,
         secondary = md_theme_dark_secondary,
@@ -62,7 +63,6 @@ object DefaultTheme : BaseTheme {
         surface = md_theme_dark_surface,
         onSurface = md_theme_dark_onSurface,
         primaryVariant = md_theme_dark_primaryVariant,
-        secondaryVariant = md_theme_dark_secondaryVariant,
-        isLight = true
+        secondaryVariant = md_theme_dark_secondaryVariant
     )
 }

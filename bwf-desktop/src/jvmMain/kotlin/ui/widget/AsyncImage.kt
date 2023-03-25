@@ -1,9 +1,10 @@
 package ui.widget
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -41,11 +42,12 @@ enum class ImageTransformation(var radius: Int = 8) {
     RoundedCorner(radius = 8)
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun <T> AsyncImage(
     modifier: Modifier,
     load: suspend () -> T,
-    painterFor: @Composable (T) -> Painter,
+    imageFor: @Composable (T) -> T,
     contentDescription: String? = null,
     alignment: Alignment = Alignment.Center,
     contentScale: ContentScale = ContentScale.Crop,
@@ -77,18 +79,29 @@ fun <T> AsyncImage(
     ) {
         AnimatedVisibility(
             visible = image != null,
-            enter = fadeIn(animationSpec = tween(150)),
+            enter = scaleIn(animationSpec = tween(150)),
             exit = fadeOut(animationSpec = tween(350))
         ) {
-            Image(
-                painter = painterFor(image!!),
-                contentDescription = contentDescription,
-                alignment = alignment,
-                contentScale = contentScale,
-                colorFilter = colorFilter,
-                alpha = alpha,
-                modifier = Modifier.fillMaxSize()
-            )
+            when (val img = imageFor(image!!)) {
+                is Painter -> Image(
+                    painter = img,
+                    contentDescription = contentDescription,
+                    alignment = alignment,
+                    contentScale = contentScale,
+                    colorFilter = colorFilter,
+                    alpha = alpha,
+                    modifier = Modifier.fillMaxSize()
+                )
+                is ImageBitmap -> Image(
+                    bitmap = img,
+                    contentDescription = contentDescription,
+                    alignment = alignment,
+                    contentScale = contentScale,
+                    colorFilter = colorFilter,
+                    alpha = alpha,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
         }
     }
 }
@@ -113,12 +126,11 @@ private suspend fun urlStream(url: String) = HttpClient(CIO).use {
 
 @Composable
 fun handleNationIcon(url: String): Painter? {
-    println(url)
     var path = ""
     when {
         url.contains("malaysia.svg") -> path = "flags/my.svg"
         url.contains("china.svg") -> path = "flags/cn.svg"
-        url == "chinese-taipei.svg" -> path = "flags/chinese-taipei.svg"
+        url.contains("chinese-taipei.svg") -> path = "flags/cn_tpe.png"
         url.contains("india") -> path = "flags/in.svg"
     }
     return if (path.isNotEmpty()) painterResource(path) else null
