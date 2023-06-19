@@ -11,5 +11,6 @@ enum class Screen {
     AllYearMatchesScreen,
     SettingsScreen,
     PlayerProfileScreen,
-    LocalMatchScreen
+    LocalMatchScreen,
+    CurrentLiveScreen
 }

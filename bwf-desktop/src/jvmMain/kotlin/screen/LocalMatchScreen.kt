@@ -19,16 +19,22 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.focus.focusTarget
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.loadXmlImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.useResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import data.*
 import ui.widget.CourtField
 import navcontroller.NavController
+import org.xml.sax.InputSource
 import ui.theme.BwfTheme
 import ui.viewmodel.LocalMatchViewModel
 import ui.widget.LiveScoreBoard
+import utilities.useIcon
 
 @Composable
 fun LocalMatchScreen(
@@ -50,7 +56,7 @@ fun LocalMatchScreen(
                             Icon(
                                 imageVector = Icons.Filled.Close,
                                 contentDescription = "To Cancel A Game's Creating",
-                                tint = MaterialTheme.colors.primaryVariant
+                                tint = MaterialTheme.colors.onSurface
                             )
                         }
                     }
@@ -70,13 +76,15 @@ fun LocalMatchScreen(
                             println(uiState.matchData.player2Scores)
                         }) {
                             Icon(
-                                painter = painterResource("icons/remove.svg"),
+                                painter = useIcon("stop"),
                                 contentDescription = "End",
                                 tint = MaterialTheme.colors.primaryVariant
                             )
                         }
                     }
-                }
+                },
+                backgroundColor = Color.Transparent,
+                elevation = Dp.Unspecified
             )
         },
         floatingActionButton = {
@@ -114,7 +122,7 @@ fun LocalMatchScreen(
                     },
                     icon = {
                         Icon(
-                            painter = painterResource("icons/remove.svg"),
+                            painter = useIcon("save"),
                             contentDescription = "Save"
                         )
                     },

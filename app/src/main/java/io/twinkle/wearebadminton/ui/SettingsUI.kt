@@ -33,7 +33,6 @@ import io.twinkle.wearebadminton.ui.widget.TextTitle
 import io.twinkle.wearebadminton.utilities.Constants
 import io.twinkle.wearebadminton.utilities.settings
 import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class, DelicateCoroutinesApi::class)
@@ -47,6 +46,7 @@ fun SettingsUI() {
     val refreshingFrequency = remember { mutableStateOf(10) }
     var showBreakingDown by remember { mutableStateOf(true) }
     var dynamicColor by remember { mutableStateOf(true) }
+    val scope = rememberCoroutineScope()
     LaunchedEffect(key1 = Unit) {
         context.settings.data.collect {
             theme.value = it[Constants.KEY_THEME] ?: 0
@@ -129,7 +129,7 @@ fun SettingsUI() {
                                                 .show()
                                         } else {
                                             theme.value = it
-                                            GlobalScope.launch {
+                                            scope.launch {
                                                 context.settings.edit { pref ->
                                                     pref[Constants.KEY_THEME] = it
                                                 }
@@ -159,7 +159,7 @@ fun SettingsUI() {
                             checked = dynamicColor,
                             onCheckedChange = {
                                 dynamicColor = it
-                                GlobalScope.launch {
+                                scope.launch {
                                     context.settings.edit { pref ->
                                         pref[Constants.KEY_DYNAMIC_COLOR] = dynamicColor
                                     }
@@ -169,7 +169,7 @@ fun SettingsUI() {
                     },
                     onClick = {
                         dynamicColor = !dynamicColor
-                        GlobalScope.launch {
+                        scope.launch {
                             context.settings.edit {
                                 it[Constants.KEY_DYNAMIC_COLOR] = dynamicColor
                             }
@@ -226,7 +226,7 @@ fun SettingsUI() {
                                         .fillMaxWidth()
                                         .clickable {
                                             previousSizeCount.value = it
-                                            GlobalScope.launch {
+                                            scope.launch {
                                                 context.settings.edit { pref ->
                                                     pref[Constants.KEY_MATCH_PREVIOUS_SIZE] =
                                                         it
@@ -244,7 +244,7 @@ fun SettingsUI() {
                                                 selected = it == previousSizeCount.value,
                                                 onClick = {
                                                     previousSizeCount.value = it
-                                                    GlobalScope.launch {
+                                                    scope.launch {
                                                         context.settings.edit { pref ->
                                                             pref[Constants.KEY_MATCH_PREVIOUS_SIZE] =
                                                                 it
@@ -315,7 +315,7 @@ fun SettingsUI() {
                                         .fillMaxWidth()
                                         .clickable {
                                             worldRankPerPage.value = it
-                                            GlobalScope.launch {
+                                            scope.launch {
                                                 context.settings.edit { pref ->
                                                     pref[Constants.WORLD_RANKING_COUNT_PER_PAGE] =
                                                         it
@@ -333,7 +333,7 @@ fun SettingsUI() {
                                                 selected = it == worldRankPerPage.value,
                                                 onClick = {
                                                     worldRankPerPage.value = it
-                                                    GlobalScope.launch {
+                                                    scope.launch {
                                                         context.settings.edit { pref ->
                                                             pref[Constants.WORLD_RANKING_COUNT_PER_PAGE] =
                                                                 it
@@ -372,7 +372,7 @@ fun SettingsUI() {
                             checked = showBreakingDown,
                             onCheckedChange = {
                                 showBreakingDown = it
-                                GlobalScope.launch {
+                                scope.launch {
                                     context.settings.edit { pref ->
                                         pref[Constants.KEY_SHOW_BREAKING_DOWN] = showBreakingDown
                                     }
@@ -382,7 +382,7 @@ fun SettingsUI() {
                     },
                     onClick = {
                         showBreakingDown = !showBreakingDown
-                        GlobalScope.launch {
+                        scope.launch {
                             context.settings.edit {
                                 it[Constants.KEY_SHOW_BREAKING_DOWN] = showBreakingDown
                             }
@@ -438,7 +438,7 @@ fun SettingsUI() {
                                         .fillMaxWidth()
                                         .clickable {
                                             refreshingFrequency.value = it
-                                            GlobalScope.launch {
+                                            scope.launch {
                                                 context.settings.edit { pref ->
                                                     pref[Constants.KEY_LIVE_MATCH_REFRESHING_FREQUENCY] =
                                                         it
@@ -456,7 +456,7 @@ fun SettingsUI() {
                                                 selected = it == refreshingFrequency.value,
                                                 onClick = {
                                                     refreshingFrequency.value = it
-                                                    GlobalScope.launch {
+                                                    scope.launch {
                                                         context.settings.edit { pref ->
                                                             pref[Constants.KEY_LIVE_MATCH_REFRESHING_FREQUENCY] =
                                                                 it

@@ -28,7 +28,7 @@ import androidx.compose.ui.window.DialogState
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Headers
 import com.google.gson.Gson
-import io.twinkle.wearebadminton.data.bean.RankingBean
+import data.bean.RankingBean
 import io.twinkle.wearebadminton.ui.widget.TextTitle
 import navcontroller.NavController
 import navcontroller.rememberNavController

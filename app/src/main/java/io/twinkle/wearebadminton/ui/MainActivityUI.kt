@@ -76,7 +76,7 @@ fun MainActivityUI(activity: MainActivity) {
                     items(FunctionListItem.values()) {
                         Box(Modifier.padding(5.dp)) {
                             FunctionListCard(
-                                title = it.title,
+                                item = it,
                                 modifier = Modifier
                                     .clip(RoundedCornerShape(8.dp))
                                     .align(Alignment.Center)
@@ -138,7 +138,14 @@ fun MainActivityUI(activity: MainActivity) {
                                                 )
                                                 activity.startActivity(intent)
                                             }
-                                            else -> {}
+                                            FunctionListItem.MatchDraw -> {
+                                                val intent = Intent()
+                                                intent.setClass(
+                                                    activity,
+                                                    MatchDrawActivity::class.java
+                                                )
+                                                activity.startActivity(intent)
+                                            }
                                         }
                                     })
                         }

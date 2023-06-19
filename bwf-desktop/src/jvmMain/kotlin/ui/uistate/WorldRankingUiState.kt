@@ -1,6 +1,6 @@
 package ui.uistate
 
-import io.twinkle.wearebadminton.data.bean.RankingBean
+import data.bean.RankingBean
 import data.payload.RankPayload
 
 data class WorldRankingUiState(

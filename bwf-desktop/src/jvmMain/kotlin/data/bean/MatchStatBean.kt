@@ -1,4 +1,4 @@
-package io.twinkle.wearebadminton.data.bean
+package data.bean
 
 import com.github.kittinunf.fuel.core.ResponseDeserializable
 import com.google.gson.Gson

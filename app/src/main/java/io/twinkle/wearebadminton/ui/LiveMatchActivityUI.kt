@@ -62,33 +62,35 @@ fun LiveMatchActivityUI(viewModel: LiveMatchViewModel = viewModel()) {
                                 hasUpdate =
                                     uiState.matches[uiState.topIndex!!] != uiState.lastMatches[uiState.topIndex!!]
                             }
-                            Box(
-                                modifier = Modifier
-                                    .padding(16.dp)
-                                    .background(
-                                        brush = Brush.verticalGradient(
-                                            listOf(
-                                                MaterialTheme.colorScheme.background,
-                                                MaterialTheme.colorScheme.background.copy(0.75f),
-                                                MaterialTheme.colorScheme.background.copy(0.5f),
-                                                MaterialTheme.colorScheme.background.copy(0.25f),
-                                                Color.Transparent,
+                            Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
+                                Box(
+                                    modifier = Modifier
+                                        .padding(16.dp)
+                                        .background(
+                                            brush = Brush.verticalGradient(
+                                                listOf(
+                                                    MaterialTheme.colorScheme.background,
+                                                    MaterialTheme.colorScheme.background.copy(0.75f),
+                                                    MaterialTheme.colorScheme.background.copy(0.5f),
+                                                    MaterialTheme.colorScheme.background.copy(0.25f),
+                                                    Color.Transparent,
+                                                )
                                             )
                                         )
+                                        .shadow(
+                                            elevation = 8.dp,
+                                            shape = RoundedCornerShape(8.dp)
+                                        )
+                                ) {
+                                    LiveCourtCard(
+                                        index = uiState.topIndex!!,
+                                        matchDetail = uiState.matches[uiState.topIndex!!].match_detail,
+                                        liveDetail = uiState.matches[uiState.topIndex!!].live_detail,
+                                        matchStatResults = uiState.matchStatResults,
+                                        hasUpdate = hasUpdate,
+                                        viewModel = viewModel
                                     )
-                                    .shadow(
-                                        elevation = 8.dp,
-                                        shape = RoundedCornerShape(8.dp)
-                                    )
-                            ) {
-                                LiveCourtCard(
-                                    index = uiState.topIndex!!,
-                                    matchDetail = uiState.matches[uiState.topIndex!!].match_detail,
-                                    liveDetail = uiState.matches[uiState.topIndex!!].live_detail,
-                                    matchStatResults = uiState.matchStatResults,
-                                    hasUpdate = hasUpdate,
-                                    viewModel = viewModel
-                                )
+                                }
                             }
                         }
                     }

@@ -40,8 +40,8 @@ import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Headers
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import data.bean.*
 import data.payload.*
-import io.twinkle.wearebadminton.data.bean.*
 import io.twinkle.wearebadminton.ui.widget.TextTitle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

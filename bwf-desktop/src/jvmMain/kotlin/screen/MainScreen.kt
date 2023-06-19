@@ -78,6 +78,9 @@ fun MainScreen(navController: NavController) {
                                             FunctionListItem.NewMatch -> {
                                                 navController.navigate(Screen.LocalMatchScreen.name)
                                             }
+                                            FunctionListItem.LiveMatch -> {
+                                                navController.navigate(Screen.CurrentLiveScreen.name)
+                                            }
                                             else -> {}
                                         }
                                     })

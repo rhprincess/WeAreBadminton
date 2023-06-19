@@ -1,4 +1,4 @@
-package io.twinkle.wearebadminton.data.bean
+package data.bean
 
 data class Breaks(
     val date: String,

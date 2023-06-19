@@ -1,6 +1,6 @@
 package ui.uistate
 
-import io.twinkle.wearebadminton.data.bean.BioModel
+import data.bean.BioModel
 
 data class PlayerProfileUiState(
     val id: String = "",

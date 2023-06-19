@@ -23,14 +23,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import io.twinkle.wearebadminton.data.bean.MatchPreviousResults
+import data.bean.MatchPreviousResults
 import ui.theme.BwfTheme
 import ui.theme.RankDownColor
 import utilities.BwfApi
+import utilities.useIcon
 
 @Composable
 fun MatchPanel(results: MatchPreviousResults? = null) {
@@ -101,7 +101,7 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                     Row {
                         Icon(
                             // compare.svg
-                            painter = painterResource("icons/remove.svg"),
+                            painter = useIcon("compare_arrows"),
                             contentDescription = "query h2h data",
                             modifier = Modifier.size(16.dp),
                             tint = MaterialTheme.colors.onSurface
@@ -350,7 +350,7 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                 ) {
                     Icon(
                         // time.svg
-                        painter = painterResource("icons/remove.svg"),
+                        painter = useIcon("timer"),
                         contentDescription = "Duration",
                         modifier = Modifier.size(25.dp),
                         tint = MaterialTheme.colors.onSurface

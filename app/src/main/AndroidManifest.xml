@@ -78,6 +78,11 @@
             android:name=".activity.LiveMatchActivity"
             android:exported="true"
             android:theme="@style/Theme.WeAreBadminton" />
+
+        <activity
+            android:name=".activity.MatchDrawActivity"
+            android:exported="true"
+            android:theme="@style/Theme.WeAreBadminton" />
     </application>
 
 </manifest>

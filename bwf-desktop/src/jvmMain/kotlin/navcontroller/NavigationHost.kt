@@ -48,7 +48,7 @@ fun NavigationHost.NavigationGraphBuilder.composable(
 ) {
     val rightRoute = navController.currentScreen.value == route
     val transition = updateTransition(rightRoute, label = "screen_transition")
-    val screenAlpha by transition.animateFloat(transitionSpec = { tween(durationMillis = 300, easing = LinearOutSlowInEasing) }) { if (rightRoute) 1f else 0f }
+    val screenAlpha by transition.animateFloat(transitionSpec = { tween(durationMillis = 150, easing = LinearOutSlowInEasing) }) { if (rightRoute) 1f else 0f }
     if (rightRoute) {
         Box(
             Modifier.fillMaxSize().alpha(screenAlpha)

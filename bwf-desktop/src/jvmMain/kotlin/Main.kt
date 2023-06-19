@@ -13,6 +13,7 @@ import navcontroller.composable
 import navcontroller.rememberNavController
 import screen.*
 import ui.theme.BwfTheme
+import ui.viewmodel.LiveMatchViewModel
 import ui.viewmodel.LocalMatchViewModel
 import ui.viewmodel.PlayerProfileViewModel
 import ui.viewmodel.WorldRankingViewModel
@@ -24,15 +25,16 @@ import utilities.LocalScreenSize
 fun main() = application {
     val navController by rememberNavController(Screen.MainScreen.name)
     val currentScreen by remember { navController.currentScreen }
+    val windowState = rememberWindowState(width = 375.dp, height = 812.dp)
     val theme = mutableStateOf(0)
     Window(
         title = "BwfBadminton",
         onCloseRequest = ::exitApplication,
-        state = rememberWindowState(width = 375.dp, height = 812.dp),
+        state = windowState,
         icon = painterResource("svg/logo-bwf-rgb.svg")
     ) {
         theme.value = DataStoreUtils.readIntData(Constants.KEY_THEME)
-        CompositionLocalProvider(LocalScreenSize provides IntSize(window.width, window.height)) {
+        CompositionLocalProvider(LocalScreenSize provides windowState.size) {
             BwfTheme(theme = theme.value) {
                 CustomNavigationHost(window, navController)
             }
@@ -48,10 +50,6 @@ fun CustomNavigationHost(
     NavigationHost(window, navController) {
         composable(Screen.MainScreen.name) {
             MainScreen(navController)
-        }
-
-        composable(Screen.WorldRankingScreen.name) {
-            WorldRankingScreen(navController)
         }
 
         composable(Screen.SettingsScreen.name) {
@@ -71,6 +69,15 @@ fun CustomNavigationHost(
         composable(Screen.LocalMatchScreen.name) {
             val localMatchViewModel = LocalMatchViewModel.viewModel()
             LocalMatchScreen(navController, localMatchViewModel)
+        }
+
+        composable(Screen.CurrentLiveScreen.name) {
+            CurrentLiveScreen(navController)
+        }
+
+        composable(Screen.LiveMatchScreen.name) {
+            val liveMatchViewModel = LiveMatchViewModel.viewModel()
+            LiveMatchScreen(navController,liveMatchViewModel)
         }
     }.build()
 }

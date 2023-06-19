@@ -2,7 +2,7 @@ package ui.viewmodel
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import io.twinkle.wearebadminton.data.bean.RankingBean
+import data.bean.RankingBean
 import data.payload.RankPayload
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
