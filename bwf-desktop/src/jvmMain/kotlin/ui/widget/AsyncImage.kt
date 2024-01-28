@@ -1,10 +1,7 @@
 package ui.widget
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
@@ -22,19 +20,19 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.loadImageBitmap
-import androidx.compose.ui.res.loadSvgPainter
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.*
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
+import io.ktor.client.features.*
 import io.ktor.client.request.*
 import io.ktor.utils.io.errors.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayInputStream
 import java.io.File
+import java.io.FileOutputStream
 
 enum class ImageTransformation(var radius: Int = 8) {
     Circle,
@@ -79,8 +77,8 @@ fun <T> AsyncImage(
     ) {
         AnimatedVisibility(
             visible = image != null,
-            enter = scaleIn(animationSpec = tween(150)),
-            exit = fadeOut(animationSpec = tween(350))
+            enter = fadeIn(animationSpec = tween(100)),
+            exit = fadeOut(animationSpec = tween(150))
         ) {
             when (val img = imageFor(image!!)) {
                 is Painter -> Image(
@@ -114,14 +112,64 @@ fun loadSvgPainter(file: File, density: Density): Painter =
 
 /* Loading from network with Ktor client API (https://ktor.io/docs/client.html). */
 
-suspend fun loadImageBitmap(url: String): ImageBitmap =
-    urlStream(url).use(::loadImageBitmap)
+suspend fun loadImageBitmap(url: String): ImageBitmap {
+    val file = when {
+        url.contains("assets/players/hero") -> File("caches/hero_" + url.substringAfterLast("/"))
+        url.contains("assets/players/thumbnail") -> File("caches/thumbnail_" + url.substringAfterLast("/"))
+        else -> File("caches/" + url.substringAfterLast("/"))
+    }
+    if (!file.parentFile.exists()) { // 创建父级目录
+        file.parentFile.mkdirs()
+    }
 
-suspend fun loadSvgPainter(url: String, density: Density): Painter =
-    urlStream(url).use { loadSvgPainter(it, density) }
+    return if (file.exists()) {
+        try {
+            return loadImageBitmap(file)
+        } catch (e: Exception) {
+            return urlStream(url).use(::loadImageBitmap)
+        }
+    } else {
+        val outputStream = withContext(Dispatchers.IO) {
+            FileOutputStream(file)
+        }
+        download(url, outputStream) // 将文件下载至缓存区
+        urlStream(url).use(::loadImageBitmap)
+    }
+}
+
+
+@OptIn(ExperimentalComposeUiApi::class)
+suspend fun loadSvgPainter(url: String, density: Density): Painter {
+    val file = File("caches/" + url.substringAfterLast("/"))
+    val error = ResourceLoader.Default.load("svg/logo-bwf-rgb.svg")
+    if (file.parentFile != null) {
+        if (!file.parentFile.exists()) { // 创建父级目录
+            file.parentFile.mkdirs()
+        }
+    }
+
+    return if (file.exists()) {
+        try {
+            return loadSvgPainter(file, density)
+        } catch (e: Exception) {
+            return loadSvgPainter(error, density)
+        }
+    } else {
+        val outputStream = withContext(Dispatchers.IO) {
+            FileOutputStream(file)
+        }
+        download(url, outputStream) // 将文件下载至缓存区
+        urlStream(url).use { loadSvgPainter(it, density) }
+    }
+}
 
 private suspend fun urlStream(url: String) = HttpClient(CIO).use {
     ByteArrayInputStream(it.get(url))
+}
+
+//下载文件
+private suspend fun download(url: String, fileOutputStream: FileOutputStream) = HttpClient(CIO).use {
+    ByteArrayInputStream(it.get(url)).copyTo(fileOutputStream)
 }
 
 @Composable

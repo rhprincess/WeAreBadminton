@@ -59,7 +59,7 @@ fun WorldRankingCard(
                         val bundle = NavController.ScreenBundle()
                         bundle.strings["playerId"] = data.player1_model.id.toString()
                         bundle.ints["catId"] = catId
-                        navController.navigate(Screen.PlayerProfileScreen.name, bundle)
+                        navController.navigate(Screen.PlayerProfileScreen, bundle)
                     }
                 }
         ) {
@@ -149,9 +149,9 @@ fun WorldRankingCard(
             // Tournaments
             Box(
                 modifier = Modifier
-                    .width(35.dp)
+                    .width(45.dp)
                     .height(55.dp)
-                    .padding(start = 5.dp)
+                    .padding(start = 15.dp)
             ) {
                 Text(
                     text = data.tournaments.toString(),
@@ -161,7 +161,7 @@ fun WorldRankingCard(
                     color = MaterialTheme.colors.onSurface
                 )
             }
-            Spacer(modifier = Modifier.width(10.dp))
+            Spacer(modifier = Modifier.width(2.dp))
             // Points
             Box(
                 modifier = Modifier
@@ -191,7 +191,7 @@ fun WorldRankingCardPlacement() {
             .height(45.dp)
     ) {
         // Rank
-        Box(modifier = Modifier.size(45.dp)) {
+        Box(modifier = Modifier.size(45.dp).padding(start = 10.dp)) {
             Text(
                 text = "排名",
                 modifier = Modifier
@@ -203,20 +203,20 @@ fun WorldRankingCardPlacement() {
         // Rank Change
         Spacer(
             modifier = Modifier
-                .width(36.dp)
+                .width(15.dp)
                 .fillMaxHeight()
         )
         // Name
         Box(
             modifier = Modifier
                 .height(45.dp)
-                .padding(start = 5.dp)
+                .padding(start = 35.dp)
                 .weight(1f)
         ) {
             Text(
                 text = "名字",
                 modifier = Modifier
-                    .align(Alignment.Center)
+                    .align(Alignment.CenterStart)
                     .fillMaxWidth(),
                 fontSize = 13.sp,
                 color = MaterialTheme.colors.onSurface
@@ -224,7 +224,7 @@ fun WorldRankingCardPlacement() {
         }
         // Nation
         Box(
-            modifier = Modifier.size(45.dp),
+            modifier = Modifier.size(50.dp).padding(end = 10.dp).weight(0.5f),
             contentAlignment = Alignment.Center
         ) {
             Text(
@@ -263,13 +263,5 @@ fun WorldRankingCardPlacement() {
             )
         }
         Spacer(modifier = Modifier.width(10.dp))
-    }
-}
-
-@Preview
-@Composable
-fun WorldRankingCardPlacementPreview() {
-    BwfTheme {
-        WorldRankingCardPlacement()
     }
 }

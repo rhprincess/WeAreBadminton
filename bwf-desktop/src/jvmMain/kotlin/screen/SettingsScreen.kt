@@ -1,14 +1,11 @@
 package screen
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -17,33 +14,28 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogState
-import io.twinkle.wearebadminton.ui.widget.TextTitle
+import androidx.compose.ui.window.*
 import kotlinx.coroutines.launch
 import navcontroller.NavController
-import navcontroller.rememberNavController
-import ui.theme.BwfTheme
 import ui.theme.Theme
+import ui.widget.DialogWindowTitleBar
 import ui.widget.SettingsItem
-import utilities.Constants
-import utilities.DataStoreUtils
+import utilities.*
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SettingsScreen(navController: NavController) {
-    val theme = remember { mutableStateOf(0) }
+fun SettingsScreen(navController: NavController, theme: MutableState<Int>, darkTheme: MutableState<Boolean>) {
     val previousSizeCount = remember { mutableStateOf(4) }
     val worldRankPerPage = remember { mutableStateOf(100) }
     val refreshingFrequency = remember { mutableStateOf(10) }
     var showBreakingDown by remember { mutableStateOf(true) }
-    var dark by remember { mutableStateOf(true) }
     val scope = rememberCoroutineScope()
     LaunchedEffect(key1 = Unit) {
         theme.value = DataStoreUtils.readIntData(Constants.KEY_THEME)
@@ -51,6 +43,7 @@ fun SettingsScreen(navController: NavController) {
         worldRankPerPage.value = DataStoreUtils.readIntData(Constants.WORLD_RANKING_COUNT_PER_PAGE, 100)
         refreshingFrequency.value = DataStoreUtils.readIntData(Constants.KEY_LIVE_MATCH_REFRESHING_FREQUENCY, 5)
         showBreakingDown = DataStoreUtils.readBooleanData(Constants.KEY_SHOW_BREAKING_DOWN, true)
+        darkTheme.value = DataStoreUtils.readBooleanData(Constants.KEY_DARK_MODE, false)
     }
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colors.surface),
@@ -58,7 +51,7 @@ fun SettingsScreen(navController: NavController) {
             TopAppBar(
                 title = {
                     Text(
-                        "Settings",
+                        "设置",
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -69,7 +62,7 @@ fun SettingsScreen(navController: NavController) {
                     IconButton(onClick = {
                         navController.navigateBack()
                     }) {
-                        Icon(
+                        AutoThemedIcon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "Back"
                         )
@@ -79,12 +72,12 @@ fun SettingsScreen(navController: NavController) {
         },
         content = { innerPadding ->
             Column(modifier = Modifier.padding(innerPadding)) {
-                Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+                Column {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-//                        Icon(
+//                        AutoThemedIcon(
 //                            painter = painterResource(""),
 //                            contentDescription = "Theme",
 //                            modifier = Modifier
@@ -106,44 +99,96 @@ fun SettingsScreen(navController: NavController) {
                             color = MaterialTheme.colors.onSurface.copy(0.75f),
                         )
                     }
-                    LazyRow(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 12.dp),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    Column(
+                        Modifier.height(65.dp).fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
                     ) {
-                        items(Theme.THEME_SIZE) {
-                            Box(
-                                modifier = Modifier
-                                    .size(32.dp)
-                                    .background(
-                                        color = if (dark) {
-                                            Theme.get(it).darkColors.primary
-                                        } else {
-                                            Theme.get(it).lightColors.primary
-                                        },
-                                        shape = CircleShape
-                                    )
-                                    .clickable {
-                                        theme.value = it
-                                        scope.launch {
-                                            DataStoreUtils.putData(Constants.KEY_THEME, it)
-                                        }
-                                    }
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Filled.Done,
-                                    contentDescription = "Selected",
-                                    tint = Color.White,
+                        val lazyListState = rememberLazyListState()
+                        val adapter = rememberScrollbarAdapter(lazyListState)
+                        LazyRow(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(1f)
+                                .padding(horizontal = 8.dp),
+                            horizontalArrangement = Arrangement.spacedBy(15.dp),
+                            state = lazyListState
+                        ) {
+                            items(Theme.THEME_SIZE) {
+                                Box(
                                     modifier = Modifier
-                                        .alpha(if (theme.value == it) 1f else 0f)
-                                        .padding(8.dp)
-                                        .fillMaxSize()
-                                )
+                                        .size(50.dp)
+                                        .background(
+                                            color = if (darkTheme.value) {
+                                                Theme.get(it).darkColors.primary
+                                            } else {
+                                                Theme.get(it).lightColors.primary
+                                            },
+                                            shape = CircleShape
+                                        )
+                                        .clickable {
+                                            theme.value = it
+                                            scope.launch {
+                                                DataStoreUtils.putData(Constants.KEY_THEME, it)
+                                            }
+                                        }
+                                ) {
+                                    AutoThemedIcon(
+                                        imageVector = Icons.Filled.Done,
+                                        contentDescription = "Selected",
+                                        tint = Color.White,
+                                        modifier = Modifier
+                                            .alpha(if (theme.value == it) 1f else 0f)
+                                            .padding(8.dp)
+                                            .fillMaxSize()
+                                    )
+                                }
                             }
                         }
+                        HorizontalScrollbar(
+                            adapter = adapter,
+                            modifier = Modifier.fillMaxWidth(),
+                            style = LocalScrollbarStyle.current.copy(
+                                hoverColor = MaterialTheme.colors.primary,
+                                unhoverColor = MaterialTheme.colors.primary.copy(alpha = 0.15f)
+                            )
+                        )
                     }
                 }
+
+                SettingsItem(
+                    title = "夜间模式",
+                    subtitle = "切换夜间模式",
+                    icon = {
+                        AutoThemedIcon(
+                            painter = useIcon("nightlight", SvgIcon.OUTLINE),
+                            contentDescription = "Theme",
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(12.dp),
+                            tint = MaterialTheme.colors.onSurface
+                        )
+                        Box(Modifier.size(56.dp))
+                    },
+                    custom = {
+                        Switch(
+                            checked = darkTheme.value,
+                            onCheckedChange = {
+                                darkTheme.value = it
+                                scope.launch {
+                                    DataStoreUtils.putData(Constants.KEY_DARK_MODE, it)
+                                }
+                                darkTheme.value = it
+                            }
+                        )
+                    },
+                    onClick = {
+                        darkTheme.value = !darkTheme.value
+                        scope.launch {
+                            DataStoreUtils.putData(Constants.KEY_DARK_MODE, darkTheme.value)
+                        }
+                    }
+                )
 
                 /**                       近期比赛显示数量                       **/
                 var previousCountDialog by remember { mutableStateOf(false) }
@@ -151,14 +196,14 @@ fun SettingsScreen(navController: NavController) {
                     title = "近期比赛显示数量",
                     subtitle = "在运动员主页中显示最近的比赛赛事比分情况",
                     icon = {
-//                        Icon(
-//                            painter = painterResource(""),
-//                            contentDescription = "Theme",
-//                            modifier = Modifier
-//                                .fillMaxSize()
-//                                .padding(12.dp),
-//                            tint = MaterialTheme.colors.onSurface
-//                        )
+                        AutoThemedIcon(
+                            painter = useIcon("numbers", SvgIcon.OUTLINE),
+                            contentDescription = "Theme",
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(12.dp),
+                            tint = MaterialTheme.colors.onSurface
+                        )
                         Box(Modifier.size(56.dp))
                     },
                     custom = {
@@ -177,19 +222,15 @@ fun SettingsScreen(navController: NavController) {
                 val tags = arrayListOf(2, 3, 4, 5, 6, 7, 8)
 
                 if (previousCountDialog) {
-                    Dialog(
-                        title = "近期比赛显示数量",
-                        state = DialogState(width = 325.dp, height = 435.dp),
-                        onCloseRequest = { previousCountDialog = false },
-                    ) {
+                    Dialog(onDismissRequest = { previousCountDialog = false }, properties = DialogProperties()) {
                         Column(
                             modifier = Modifier
                                 .background(
                                     MaterialTheme.colors.background,
                                     shape = RoundedCornerShape(8.dp)
-                                )
+                                ).clip(RoundedCornerShape(8.dp))
                         ) {
-                            TextTitle(title = "近期比赛显示数量")
+                            DialogWindowTitleBar(title = "近期比赛显示数量") { previousCountDialog = false }
 
                             Column(Modifier.verticalScroll(rememberScrollState())) {
                                 tags.forEach {
@@ -237,7 +278,7 @@ fun SettingsScreen(navController: NavController) {
                     title = "世界排名显示数量",
                     subtitle = "世界排名页面最多显示前多少名的排名情况",
                     icon = {
-//                        Icon(
+//                        AutoThemedIcon(
 //                            painter = painterResource(""),
 //                            contentDescription = "Theme",
 //                            modifier = Modifier
@@ -263,19 +304,16 @@ fun SettingsScreen(navController: NavController) {
                 val perPage = arrayListOf(10, 20, 25, 50, 100)
 
                 if (worldRankingPageDialog) {
-                    Dialog(
-                        title = "世界排名显示数量",
-                        state = DialogState(width = 325.dp, height = 415.dp),
-                        onCloseRequest = { worldRankingPageDialog = false },
-                    ) {
+                    Dialog(onDismissRequest = { previousCountDialog = false }, properties = DialogProperties()) {
                         Column(
                             modifier = Modifier
                                 .background(
                                     MaterialTheme.colors.background,
                                     shape = RoundedCornerShape(8.dp)
                                 ).verticalScroll(rememberScrollState())
+                                .clip(RoundedCornerShape(8.dp))
                         ) {
-                            TextTitle(title = "世界排名显示数量")
+                            DialogWindowTitleBar(title = "世界排名显示数量") { worldRankingPageDialog = false }
 
                             Column {
                                 perPage.forEach {
@@ -323,7 +361,7 @@ fun SettingsScreen(navController: NavController) {
                     title = "显示赛季积分",
                     subtitle = "显示运动员页面的赛事积分栏目",
                     icon = {
-//                        Icon(
+//                        AutoThemedIcon(
 //                            painter = painterResource(""),
 //                            contentDescription = "Theme",
 //                            modifier = Modifier
@@ -347,7 +385,7 @@ fun SettingsScreen(navController: NavController) {
                     onClick = {
                         showBreakingDown = !showBreakingDown
                         scope.launch {
-                            DataStoreUtils.putData(Constants.KEY_SHOW_BREAKING_DOWN, !showBreakingDown)
+                            DataStoreUtils.putData(Constants.KEY_SHOW_BREAKING_DOWN, showBreakingDown)
                         }
                     }
                 )
@@ -357,7 +395,7 @@ fun SettingsScreen(navController: NavController) {
                     title = "实时比分刷新频率(秒)",
                     subtitle = "每${refreshingFrequency.value}秒后，刷新当前正在直播的所有比赛比分",
                     icon = {
-//                        Icon(
+//                        AutoThemedIcon(
 //                            imageVector = Icons.Filled.Refresh,
 //                            contentDescription = "Score",
 //                            modifier = Modifier
@@ -383,19 +421,15 @@ fun SettingsScreen(navController: NavController) {
                 val frequency = arrayListOf(3, 5, 10, 15, 20)
 
                 if (liveMatchRefreshFrequencyDialog) {
-                    Dialog(
-                        title = "实时比分刷新频率(秒)",
-                        state = DialogState(width = 325.dp, height = 415.dp),
-                        onCloseRequest = { liveMatchRefreshFrequencyDialog = false },
-                    ) {
+                    Dialog(onDismissRequest = { previousCountDialog = false }, properties = DialogProperties()) {
                         Column(
                             modifier = Modifier
                                 .background(
                                     MaterialTheme.colors.background,
                                     shape = RoundedCornerShape(8.dp)
-                                )
+                                ).clip(RoundedCornerShape(8.dp))
                         ) {
-                            TextTitle(title = "实时比分刷新频率(秒)")
+                            DialogWindowTitleBar(title = "实时比分刷新频率(秒)") { liveMatchRefreshFrequencyDialog = false }
 
                             Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                                 frequency.forEach {
@@ -445,13 +479,4 @@ fun SettingsScreen(navController: NavController) {
             }
         }
     )
-}
-
-@Preview
-@Composable
-fun SettingsUIPreview() {
-    BwfTheme {
-        val navController by rememberNavController(Screen.MainScreen.name)
-        SettingsScreen(navController)
-    }
 }

@@ -168,11 +168,3 @@ fun BreakingDownCardPlacement() {
         Spacer(modifier = Modifier.width(10.dp))
     }
 }
-
-@Preview
-@Composable
-fun BreakingDownCardPlacementPreview() {
-    BwfTheme {
-        BreakingDownCardPlacement()
-    }
-}

@@ -46,11 +46,3 @@ fun SettingsItem(
         }
     }
 }
-
-@Preview()
-@Composable
-fun SettingsItemPreview() {
-    BwfTheme {
-        SettingsItem(title = "近期比赛赛事显示数量")
-    }
-}

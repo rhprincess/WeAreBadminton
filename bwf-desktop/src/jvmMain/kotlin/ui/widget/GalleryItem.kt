@@ -12,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import ui.theme.BwfTheme
@@ -45,13 +44,5 @@ fun GalleryItem(imgUrl: String = "") {
                 CircularProgressIndicator(modifier = Modifier.size(56.dp))
             }
         }
-    }
-}
-
-@Preview
-@Composable
-fun GalleryItemPreview() {
-    BwfTheme {
-        GalleryItem()
     }
 }

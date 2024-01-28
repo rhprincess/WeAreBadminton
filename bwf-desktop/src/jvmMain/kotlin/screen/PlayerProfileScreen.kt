@@ -42,7 +42,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import data.bean.*
 import data.payload.*
-import io.twinkle.wearebadminton.ui.widget.TextTitle
+import ui.widget.TextTitle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import navcontroller.NavController
@@ -724,13 +724,4 @@ private fun fetchBreakingDown(
                 }
             }, {})
         }
-}
-
-@Preview
-@Composable
-fun PlayerProfileActivityUIPreview() {
-    BwfTheme {
-        val navController by rememberNavController(startDestination = Screen.PlayerProfileScreen.name)
-        PlayerProfileScreen(navController)
-    }
 }

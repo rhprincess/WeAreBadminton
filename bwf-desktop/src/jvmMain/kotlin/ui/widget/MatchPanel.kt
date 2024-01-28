@@ -433,11 +433,3 @@ fun convertTime(time: Int): String {
     val min = time - hourMin
     return "$h:$min"
 }
-
-@Preview
-@Composable
-fun MatchPanelPreview() {
-    BwfTheme {
-        MatchPanel()
-    }
-}

@@ -1,4 +1,4 @@
-package io.twinkle.wearebadminton.ui.widget
+package ui.widget
 
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Box
@@ -39,13 +39,5 @@ fun TextTitle(
             fontFamily = fontFamily,
             fontWeight = fontWeight
         )
-    }
-}
-
-@Preview
-@Composable
-fun TextTitlePreview() {
-    BwfTheme {
-        TextTitle(title = "Title")
     }
 }

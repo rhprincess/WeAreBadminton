@@ -74,6 +74,11 @@ object BwfApi {
     const val HEAD_TO_HEAD = "https://extranet-lv.bwfbadminton.com/api/vue-h2h-count"
 
     /**
+     *  All Year matches
+     */
+    const val ALL_YEAR_MATCHES = "https://extranet-lv.bwfbadminton.com/api/vue-cal-event-tournaments"
+
+    /**
      * 世界排名 Api
      */
     const val WORLD_RANKING = "https://extranet-lv.bwfbadminton.com/api/vue-rankingtable"

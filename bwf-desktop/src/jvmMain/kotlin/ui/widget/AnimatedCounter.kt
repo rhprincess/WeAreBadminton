@@ -44,9 +44,9 @@ fun AnimatedCounter(
                     targetState = char,
                     transitionSpec = {
                         if (count < oldCount) {
-                            slideInVertically { -it } with slideOutVertically { it }
+                            slideInVertically { -it } togetherWith  slideOutVertically { it }
                         } else {
-                            slideInVertically { it } with slideOutVertically { -it }
+                            slideInVertically { it } togetherWith slideOutVertically { -it }
                         }
                     }
                 ) { s ->

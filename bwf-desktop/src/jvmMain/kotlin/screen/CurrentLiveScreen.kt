@@ -57,7 +57,8 @@ fun CurrentLiveScreen(navController: NavController) {
                     }
                 },
                 backgroundColor = Color.Transparent,
-                elevation = Dp.Unspecified)
+                elevation = Dp.Unspecified
+            )
         },
         content = { innerPadding ->
             Box(
@@ -79,7 +80,7 @@ fun CurrentLiveScreen(navController: NavController) {
                     }
                     items(currentLiveList.size) {
                         Box(modifier = Modifier.padding(16.dp)) {
-                            CurrentLiveMatchCard(navController,currentLiveList[it])
+                            CurrentLiveMatchCard(navController, currentLiveList[it])
                         }
                     }
                 }
@@ -102,13 +103,4 @@ private fun fetchCurrentLive(currentLiveList: SnapshotStateList<CurrentLiveResul
                 }
             }, {})
         }
-}
-
-@Preview
-@Composable
-fun CurrentLiveScreenPreview() {
-    BwfTheme {
-        val navController by rememberNavController(startDestination = Screen.CurrentLiveScreen.name)
-        CurrentLiveScreen(navController)
-    }
 }

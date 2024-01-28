@@ -7,4 +7,5 @@ object Constants {
     const val WORLD_RANKING_COUNT_PER_PAGE = "world_ranking_count_per_page"
     const val KEY_SHOW_BREAKING_DOWN = "show_breaking_down"
     const val KEY_LIVE_MATCH_REFRESHING_FREQUENCY = "live_match_refreshing_frequency"
+    const val KEY_DARK_MODE = "dark_mode"
 }

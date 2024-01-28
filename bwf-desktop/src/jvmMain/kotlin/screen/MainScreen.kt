@@ -22,29 +22,32 @@ import androidx.compose.ui.unit.dp
 import data.FunctionListItem
 import navcontroller.NavController
 import ui.widget.FunctionListCard
+import utilities.AutoThemedIcon
+import utilities.LocalScreenSize
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MainScreen(navController: NavController) {
+    val windowSize = LocalScreenSize.current
     Scaffold(
         modifier = Modifier.background(MaterialTheme.colors.surface),
         topBar = {
             TopAppBar(
                 title = {
                     Text(
-                        "BWF Badminton",
+                        "世界羽联信息平台",
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
                 },
                 actions = {
                     IconButton(onClick = {
-                        navController.navigate(Screen.SettingsScreen.name)
+                        navController.navigate(Screen.SettingsScreen)
                     }) {
-                        Icon(
+                        AutoThemedIcon(
                             imageVector = Icons.Filled.Settings,
                             contentDescription = "Settings",
-                            tint = MaterialTheme.colors.primarySurface
+                            tint = MaterialTheme.colors.onSurface
                         )
                     }
                 },
@@ -72,14 +75,14 @@ fun MainScreen(navController: NavController) {
                                     .align(Alignment.Center)
                                     .clickable {
                                         when (it) {
-                                            FunctionListItem.WorldRanking -> {
-                                                navController.navigate(Screen.WorldRankingScreen.name)
+                                            FunctionListItem.AllYearMatches -> {
+                                                navController.navigate(Screen.AllYearMatchesScreen)
                                             }
-                                            FunctionListItem.NewMatch -> {
-                                                navController.navigate(Screen.LocalMatchScreen.name)
+                                            FunctionListItem.WorldRanking -> {
+                                                navController.navigate(Screen.WorldRankingScreen)
                                             }
                                             FunctionListItem.LiveMatch -> {
-                                                navController.navigate(Screen.CurrentLiveScreen.name)
+                                                navController.navigate(Screen.CurrentLiveScreen)
                                             }
                                             else -> {}
                                         }

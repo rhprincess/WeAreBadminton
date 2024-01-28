@@ -2,7 +2,6 @@ package screen
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -16,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
@@ -23,21 +23,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogState
+import androidx.compose.ui.window.*
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Headers
 import com.google.gson.Gson
 import data.bean.RankingBean
-import io.twinkle.wearebadminton.ui.widget.TextTitle
 import navcontroller.NavController
-import navcontroller.rememberNavController
-import ui.theme.BwfTheme
 import ui.viewmodel.WorldRankingViewModel
 import ui.widget.*
 import utilities.BwfApi
 import utilities.Constants
 import utilities.DataStoreUtils
+import utilities.LocalWindowState
 
 @Composable
 fun WorldRankingScreen(
@@ -129,6 +126,7 @@ fun WorldRankingContent(
     val uiState by worldRankingViewModel.uiState.collectAsState()
     val density = LocalDensity.current
     val rankJson = uiState.rankJson
+    val windowState = LocalWindowState.current
     SideEffect {
         worldRankingViewModel.updateRankingBean(
             Gson().fromJson(rankJson, RankingBean::class.java)
@@ -190,22 +188,16 @@ fun WorldRankingContent(
         }
 
         if (uiState.showPlayerChoices) {
-            Dialog(
-                onCloseRequest = { worldRankingViewModel.showPlayerChoices(false) },
-                state = DialogState(width = 375.dp, height = 225.dp),
-                resizable = false,
-                title = "请选择一位球员",
-                icon = painterResource("svg/logo-bwf-rgb.svg")
-            ) {
+            Dialog(onDismissRequest = { worldRankingViewModel.showPlayerChoices(false) }, properties = DialogProperties()) {
                 Column(
                     modifier = Modifier
                         .background(
                             MaterialTheme.colors.background,
                             shape = RoundedCornerShape(8.dp)
-                        )
+                        ).clip(RoundedCornerShape(8.dp))
                 ) {
                     val list = uiState.bean!!.results.data
-                    TextTitle(title = "请选择一位球员", style = MaterialTheme.typography.body1)
+                    DialogWindowTitleBar("请选择一位球员") { worldRankingViewModel.showPlayerChoices(false) }
 
                     OutlinedButton(
                         onClick = {
@@ -213,7 +205,7 @@ fun WorldRankingContent(
                             bundle.strings["playerId"] = list[uiState.rankIndex].player1_id.toString()
                             bundle.ints["catId"] = tabIndex + 6
                             worldRankingViewModel.showPlayerChoices(false)
-                            navController.navigate(Screen.PlayerProfileScreen.name, bundle)
+                            navController.navigate(Screen.PlayerProfileScreen, bundle)
                         },
                         shape = RoundedCornerShape(16.dp),
                         modifier = Modifier.padding(start = 16.dp),
@@ -246,7 +238,7 @@ fun WorldRankingContent(
                             bundle.strings["playerId"] = list[uiState.rankIndex].player2_id.toString()
                             bundle.ints["catId"] = tabIndex + 6
                             worldRankingViewModel.showPlayerChoices(false)
-                            navController.navigate(Screen.PlayerProfileScreen.name, bundle)
+                            navController.navigate(Screen.PlayerProfileScreen, bundle)
                         },
                         shape = RoundedCornerShape(16.dp),
                         modifier = Modifier.padding(start = 16.dp, bottom = 16.dp),
@@ -295,14 +287,5 @@ private fun RefreshRanking(perPageKey: Int, worldRankingViewModel: WorldRankingV
                     worldRankingViewModel.setLoading(false)
                 }, {})
             }
-    }
-}
-
-@Preview
-@Composable
-fun WorldRankingContentPreview() {
-    BwfTheme {
-        val navController by rememberNavController(Screen.WorldRankingScreen.name)
-        WorldRankingScreen(navController)
     }
 }

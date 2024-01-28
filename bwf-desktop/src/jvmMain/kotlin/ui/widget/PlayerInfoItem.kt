@@ -19,11 +19,3 @@ fun PlayerInfoItem(key: String, value: String) {
     )
     Spacer(modifier = Modifier.height(5.dp))
 }
-
-@Preview
-@Composable
-fun PlayerInfoItemPreview() {
-    BwfTheme {
-        PlayerInfoItem("Name", "Name")
-    }
-}

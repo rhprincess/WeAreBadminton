@@ -40,7 +40,7 @@ fun CurrentLiveMatchCard(navController: NavController, result: CurrentLiveResult
                 val screenBundle = NavController.ScreenBundle()
                 screenBundle.strings["tmtId"] = result?.id.toString()
                 screenBundle.ints["tmtType"] = result?.type_id ?: 0
-                navController.navigate(Screen.LiveMatchScreen.name, screenBundle)
+                navController.navigate(Screen.LiveMatchScreen, screenBundle)
             }
         ) {
             Row(
@@ -51,7 +51,7 @@ fun CurrentLiveMatchCard(navController: NavController, result: CurrentLiveResult
                 if (result?.tmtLogo != null) {
                     AsyncImage(
                         load = {
-//                            loadSvgPainter(result.tmtLogo, density)
+                            loadSvgPainter(result.tmtLogo, density)
                         },
                         contentDescription = "nation",
                         modifier = Modifier
@@ -86,14 +86,14 @@ fun CurrentLiveMatchCard(navController: NavController, result: CurrentLiveResult
                 if (result?.catLogo != null) {
                     AsyncImage(
                         load = {
-//                            loadSvgPainter(result.catLogo, density)
+                            loadSvgPainter(result.catLogo, density)
                         },
                         contentDescription = "nation",
                         modifier = Modifier
                             .size(100.dp)
                             .padding(8.dp),
                         imageFor = { it },
-                        contentScale = ContentScale.Crop
+                        contentScale = ContentScale.Fit
                     )
                 }
             }
