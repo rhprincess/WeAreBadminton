@@ -17,15 +17,16 @@ class NavController(
 ) {
     // Variable to store the state of the current screen
     var currentScreen: MutableState<String> = mutableStateOf(startDestination)
+    var previousScreen: MutableState<String> = mutableStateOf(startDestination)
     var screenBundle = ScreenBundle()
 
     class ScreenBundle {
-        val strings: HashMap<String,String> = hashMapOf()
-        val booleans: HashMap<String,Boolean> = hashMapOf()
-        val ints: HashMap<String,Int> = hashMapOf()
-        val floats: HashMap<String,Float> = hashMapOf()
-        val longs: HashMap<String,Long> = hashMapOf()
-        val doubles: HashMap<String,Double> = hashMapOf()
+        val strings: HashMap<String, String> = hashMapOf()
+        val booleans: HashMap<String, Boolean> = hashMapOf()
+        val ints: HashMap<String, Int> = hashMapOf()
+        val floats: HashMap<String, Float> = hashMapOf()
+        val longs: HashMap<String, Long> = hashMapOf()
+        val doubles: HashMap<String, Double> = hashMapOf()
     }
 
     // Function to handle the navigation between the screen
@@ -40,6 +41,7 @@ class NavController(
                 backStackScreens = mutableSetOf()
             } else {
                 backStackScreens.add(currentScreen.value)
+                previousScreen.value = currentScreen.value
             }
 
             // switch to current screen
@@ -58,6 +60,11 @@ class NavController(
             currentScreen.value = backStackScreens.last()
             backStackScreens.remove(currentScreen.value)
         }
+    }
+
+    fun navigateBack(bundle: ScreenBundle) {
+        this.screenBundle = bundle
+        navigateBack()
     }
 }
 

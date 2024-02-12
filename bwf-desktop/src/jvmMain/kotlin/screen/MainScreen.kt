@@ -78,13 +78,22 @@ fun MainScreen(navController: NavController) {
                                             FunctionListItem.AllYearMatches -> {
                                                 navController.navigate(Screen.AllYearMatchesScreen)
                                             }
+
                                             FunctionListItem.WorldRanking -> {
                                                 navController.navigate(Screen.WorldRankingScreen)
                                             }
+
                                             FunctionListItem.LiveMatch -> {
                                                 navController.navigate(Screen.CurrentLiveScreen)
                                             }
-                                            else -> {}
+
+                                            FunctionListItem.HeadToHead -> {
+                                                navController.navigate(Screen.HeadToHeadScreen)
+                                            }
+
+                                            FunctionListItem.PopularPlayers -> {
+                                                navController.navigate(Screen.PopularPlayersScreen)
+                                            }
                                         }
                                     })
                         }

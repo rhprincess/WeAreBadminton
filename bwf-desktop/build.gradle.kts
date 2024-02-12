@@ -32,6 +32,9 @@ kotlin {
                 implementation("io.ktor:ktor-client-core:1.6.6")
                 implementation("io.ktor:ktor-client-cio:1.6.6")
                 implementation("androidx.datastore:datastore-preferences-core:1.1.0-dev01")
+                //File Convert Api
+                implementation("com.convertapi.client:convertapi:2.9")
+                implementation("org.apache.xmlgraphics:batik-all:1.17")
             }
         }
         val jvmTest by getting

@@ -4,69 +4,43 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6061c558-14c9-4ec9-ac6d-1fe547366179" name="变更" comment="beautify ui&#10;new function: AllYearMatchesScreen&#10;optimize theming logic and 2 new themes">
+    <list default="true" id="6061c558-14c9-4ec9-ac6d-1fe547366179" name="变更" comment="update h2h url and ui.&#10;update popular player screen.&#10;optimize network image fetching and showing way.&#10;and more...">
       <change afterPath="$PROJECT_DIR$/caches/41B35C01-13EC-4DCB-A3B1-C8A3184453DC.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/caches/484B01E6-DDB2-498C-912E-7CC7BA241F43.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/caches/9016DBCA-BE8A-495D-A04A-4E15AA38B579.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/caches/A736882C-463A-4A20-8941-A4A25CEDBE95.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/caches/BEC8568F-CF4E-4461-842B-D29DBA551F46.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/caches/suffix_1000_white-01.svg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/caches/suffix_300_white-01.svg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/caches/suffix_500_white-01.svg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/caches/suffix_750_white-01.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/bean/YearMatchCalendarBean.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/payload/YearMatchCalendarPayload.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/AllYearMatchesScreen.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/QcumberTheme.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/WeirdTheme.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/uistate/AllYearMatchesUiState.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/viewmodel/AllYearMatchesViewModel.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/MonthEachMatchCard.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/WindowTitleBar.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/PlayerOrder.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/HTHScreen.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/PopularPlayersScreen.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/uistate/HTHUiState.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/uistate/PlayersUiState.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/viewmodel/HTHViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/viewmodel/PlayersViewModel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/PlayerAvatarCard.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/utilities/PlayerNameUtil.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jvmMain/resources/placeholder.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/data/Country.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/data/CourtFieldData.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/data/FunctionListItem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/data/FunctionListItem.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/data/Game.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/data/MatchData.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/data/PlayerOrder.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/data/Round.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/data/ServiceDirection.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/data/Tournaments.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/CurrentLiveScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/CurrentLiveScreen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/LocalMatchScreen.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/navcontroller/NavController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/navcontroller/NavController.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/MainScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/MainScreen.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/PlayerProfileScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/PlayerProfileScreen.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/Screen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/Screen.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/SettingsScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/SettingsScreen.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/WorldRankingScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/screen/WorldRankingScreen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/DeafultTheme.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/DeafultTheme.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/Theme.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/theme/Theme.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/uistate/LocalMatchUiState.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/viewmodel/LocalMatchViewModel.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/AnimatedCounter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/AnimatedCounter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/AsyncImage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/AsyncImage.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/BreakingDownCard.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/BreakingDownCard.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/CourtField.kt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/CurrentLiveMatchCard.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/CurrentLiveMatchCard.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/GalleryItem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/GalleryItem.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/LiveScoreBoard.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/LiveCourtCard.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/LiveCourtCard.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/MatchPanel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/MatchPanel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/PlayerInfoItem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/PlayerInfoItem.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/SettingsItem.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/SettingsItem.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/TextTitle.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/TextTitle.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/MonthEachMatchCard.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/MonthEachMatchCard.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/WorldRankingCard.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/ui/widget/WorldRankingCard.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/utilities/BwfApi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/utilities/BwfApi.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/utilities/CompostionLocalUtil.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/utilities/CompostionLocalUtil.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/utilities/Constants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/utilities/Constants.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jvmMain/kotlin/utilities/Extensions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/jvmMain/kotlin/utilities/Extensions.kt" afterDir="false" />
     </list>
@@ -114,10 +88,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Enum" />
         <option value="Kotlin Object" />
         <option value="Kotlin Sealed Class" />
+        <option value="Kotlin Enum" />
         <option value="Kotlin Class" />
+        <option value="Kotlin Worksheet" />
         <option value="Kotlin File" />
       </list>
     </option>
@@ -140,6 +115,7 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/jvmMain/kotlin/Main.kt" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/jvmMain/kotlin/screen/AllYearMatchesScreen.kt" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/jvmMain/kotlin/screen/SettingsScreen.kt" root0="FORCE_HIGHLIGHTING" />
@@ -149,6 +125,9 @@
   <component name="KotlinMultiplatform" KONAN_HOME="C:\Users\walke\.konan\kotlin-native-prebuilt-windows-x86_64-1.8.10" />
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -161,35 +140,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Gradle.bwf-desktop [runDistributable].executor": "Run",
-    "Gradle.升级 Gradle 包装器.executor": "Run",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/walke/AndroidStudioProjects/WeAreBadminton/bwf-desktop",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "项目",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.45747125",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Gradle.bwf-desktop [runDistributable].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.升级 Gradle 包装器.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/walke/AndroidStudioProjects/WeAreBadminton/bwf-desktop&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.45747125&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\walke\AndroidStudioProjects\WeAreBadminton\bwf-desktop\src\jvmMain\kotlin\ui\widget" />
@@ -369,7 +348,14 @@
       <workItem from="1706381339811" duration="320000" />
       <workItem from="1706381675753" duration="659000" />
       <workItem from="1706382483247" duration="2182000" />
-      <workItem from="1706419981337" duration="1370000" />
+      <workItem from="1706419981337" duration="9325000" />
+      <workItem from="1706508223913" duration="12094000" />
+      <workItem from="1706540974081" duration="11207000" />
+      <workItem from="1706681520341" duration="613000" />
+      <workItem from="1707137886162" duration="5737000" />
+      <workItem from="1707143710251" duration="624000" />
+      <workItem from="1707144737993" duration="5731000" />
+      <workItem from="1707736626776" duration="450000" />
     </task>
     <task id="LOCAL-00001" summary="desktop support">
       <created>1679410709351</created>
@@ -406,7 +392,15 @@
       <option name="project" value="LOCAL" />
       <updated>1687148666902</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="beautify ui&#10;new function: AllYearMatchesScreen&#10;optimize theming logic and 2 new themes">
+      <option name="closed" value="true" />
+      <created>1706421802578</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1706421802578</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -431,7 +425,8 @@
     <MESSAGE value="upload icons&#10;added current live screen&#10;optimize some features" />
     <MESSAGE value="beautify ui&#10;new function: AllYearMatchesScreen&#10;optimize theming logic" />
     <MESSAGE value="beautify ui&#10;new function: AllYearMatchesScreen&#10;optimize theming logic and 2 new themes" />
-    <option name="LAST_COMMIT_MESSAGE" value="beautify ui&#10;new function: AllYearMatchesScreen&#10;optimize theming logic and 2 new themes" />
+    <MESSAGE value="update h2h url and ui.&#10;update popular player screen.&#10;optimize network image fetching and showing way.&#10;and more..." />
+    <option name="LAST_COMMIT_MESSAGE" value="update h2h url and ui.&#10;update popular player screen.&#10;optimize network image fetching and showing way.&#10;and more..." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

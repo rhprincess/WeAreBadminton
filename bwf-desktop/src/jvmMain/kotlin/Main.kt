@@ -19,6 +19,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import com.convertapi.client.Config
 import navcontroller.NavController
 import navcontroller.NavigationHost
 import navcontroller.composable
@@ -26,16 +27,13 @@ import navcontroller.rememberNavController
 import screen.*
 import ui.theme.BwfTheme
 import ui.theme.GlobalThemeChanger
-import ui.viewmodel.AllYearMatchesViewModel
-import ui.viewmodel.LiveMatchViewModel
-import ui.viewmodel.PlayerProfileViewModel
-import ui.viewmodel.WorldRankingViewModel
+import ui.viewmodel.*
 import ui.widget.WindowTitleBar
 import utilities.LocalScreenSize
 import utilities.LocalWindowState
 
-
 fun main() = application {
+    Config.setDefaultSecret("UyNa180DV1l0RE8c")
     val navController by rememberNavController(Screen.MainScreen)
     val windowState = rememberWindowState(width = 375.dp, height = 865.dp)
     Window(
@@ -54,8 +52,8 @@ fun main() = application {
             GlobalThemeChanger { theme, darkTheme ->
                 BwfTheme(theme = theme, darkTheme = darkTheme) {
                     Box(
-                        Modifier.padding(if (windowState.placement == WindowPlacement.Maximized) 0.dp else 8.dp)
-                            .shadow(elevation = 5.dp)
+                        Modifier.padding(if (windowState.placement == WindowPlacement.Maximized) 0.dp else 10.dp)
+                            .shadow(elevation = 5.dp, shape = RoundedCornerShape(8.dp))
                     ) {
                         Column(
                             Modifier
@@ -110,6 +108,16 @@ fun CustomNavigationHost(
         composable(Screen.AllYearMatchesScreen) {
             val allYearMatchesViewModel = AllYearMatchesViewModel.viewModel()
             AllYearMatchesScreen(navController, allYearMatchesViewModel)
+        }
+
+        composable(Screen.HeadToHeadScreen) {
+            val hthViewModel = HTHViewModel.viewModel()
+            HTHScreen(navController, hthViewModel)
+        }
+
+        composable(Screen.PopularPlayersScreen) {
+            val popularPlayersViewModel = PlayersViewModel.viewModel()
+            PopularPlayersScreen(navController, popularPlayersViewModel)
         }
     }.build()
 }

@@ -179,12 +179,11 @@ fun LiveCourtCard(
                     ) {
                         // 选手一国旗
                         val flag = BwfApi.FLAG_URL + matchDetail.t1p1country_model?.flag_name_svg
-                        val painter = handleNationIcon(flag)
                         AsyncImage(
                             load = {
-                                loadSvgPainter(BwfApi.FLAG_URL + matchDetail.t1p1country_model?.flag_name_svg, density)
+                                loadImageBitmap(BwfApi.FLAG_URL + matchDetail.t1p1country_model?.flag_name_svg)
                             },
-                            imageFor = { painter ?: it },
+                            imageFor = { it },
                             contentDescription = "player1",
                             modifier = Modifier
                                 .clip(CircleShape)
@@ -286,12 +285,11 @@ fun LiveCourtCard(
                     ) {
                         // 选手二国旗
                         val flag = BwfApi.FLAG_URL + matchDetail.t2p1country_model?.flag_name_svg
-                        val painter = handleNationIcon(flag)
                         AsyncImage(
                             load = {
-                                loadSvgPainter(BwfApi.FLAG_URL + matchDetail.t2p1country_model?.flag_name_svg, density)
+                                loadImageBitmap(BwfApi.FLAG_URL + matchDetail.t2p1country_model?.flag_name_svg)
                             },
-                            imageFor = { painter ?: it },
+                            imageFor = { it },
                             contentDescription = "player2",
                             modifier = Modifier
                                 .clip(CircleShape)

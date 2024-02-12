@@ -9,7 +9,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -20,17 +19,19 @@ import ui.theme.RankUpColor
 
 @Composable
 fun MonthEachMatchCard(state: MonthState) {
-    val density = LocalDensity.current
-    Row(modifier = Modifier.fillMaxWidth().height(125.dp).background(color = Color.White)) {
-//        AsyncImage(
-//            load = {
-//                loadSvgPainter(state.logo, density)
-//            },
-//            contentDescription = "logo",
-//            modifier = Modifier.size(125.dp),
-//            imageFor = { it },
-//            contentScale = ContentScale.Crop
-//        )
+    Row(
+        modifier = Modifier.fillMaxWidth().height(125.dp).background(color = Color.White),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        AsyncImage(
+            load = {
+                loadImageBitmap(state.logo.replace("5147", "5130"))
+            },
+            contentDescription = "logo",
+            modifier = Modifier.size(75.dp),
+            imageFor = { it },
+            contentScale = ContentScale.Crop
+        )
         Box(Modifier.fillMaxSize()) {
             if (state.header_url != null) {
                 AsyncImage(
@@ -77,28 +78,16 @@ fun MonthEachMatchCard(state: MonthState) {
                             color = if (state.progress == "finished") Color.Black else Color.White
                         )
                     }
-                    if (state.cat_logo != null) {
-                        if (state.cat_logo.contains(".png")) {
-                            AsyncImage(
-                                load = {
-                                    loadImageBitmap(state.cat_logo)
-                                },
-                                contentDescription = "cat_logo",
-                                modifier = Modifier.fillMaxSize(),
-                                imageFor = { it },
-                                contentScale = ContentScale.Fit
-                            )
-                        } else {
-                            AsyncImage(
-                                load = {
-                                    loadSvgPainter(state.cat_logo, density)
-                                },
-                                contentDescription = "cat_logo",
-                                modifier = Modifier.fillMaxSize(),
-                                imageFor = { it },
-                                contentScale = ContentScale.Fit
-                            )
-                        }
+                    if (!state.cat_logo.isNullOrEmpty()) {
+                        AsyncImage(
+                            load = {
+                                loadImageBitmap(state.cat_logo)
+                            },
+                            contentDescription = "cat_logo",
+                            modifier = Modifier.fillMaxSize(),
+                            imageFor = { it },
+                            contentScale = ContentScale.Fit
+                        )
                     }
                 }
             }

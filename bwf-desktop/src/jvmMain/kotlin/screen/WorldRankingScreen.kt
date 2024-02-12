@@ -18,23 +18,22 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.*
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Headers
 import com.google.gson.Gson
 import data.bean.RankingBean
+import kotlinx.coroutines.launch
 import navcontroller.NavController
 import ui.viewmodel.WorldRankingViewModel
 import ui.widget.*
 import utilities.BwfApi
 import utilities.Constants
 import utilities.DataStoreUtils
-import utilities.LocalWindowState
 
 @Composable
 fun WorldRankingScreen(
@@ -49,7 +48,7 @@ fun WorldRankingScreen(
             worldRankingViewModel.setLoading(false)
             worldRankingViewModel.finishLoadingAnimation(true)
         })
-    val perPageKey = DataStoreUtils.readIntData(Constants.WORLD_RANKING_COUNT_PER_PAGE)
+    val perPageKey = DataStoreUtils.readIntData(Constants.KEY_WORLD_RANKING_COUNT_PER_PAGE)
     // Side-load the ranking table
     if (uiState.isLoading) {
         RefreshRanking(perPageKey = perPageKey, worldRankingViewModel = worldRankingViewModel)
@@ -124,9 +123,8 @@ fun WorldRankingContent(
     innerPadding: PaddingValues = PaddingValues(0.dp)
 ) {
     val uiState by worldRankingViewModel.uiState.collectAsState()
-    val density = LocalDensity.current
     val rankJson = uiState.rankJson
-    val windowState = LocalWindowState.current
+    val scope = rememberCoroutineScope()
     SideEffect {
         worldRankingViewModel.updateRankingBean(
             Gson().fromJson(rankJson, RankingBean::class.java)
@@ -136,13 +134,16 @@ fun WorldRankingContent(
     Column(modifier = Modifier.padding(innerPadding)) {
 
         val types = listOf("男单", "女单", "男双", "女双", "混双")
-        var tabIndex by remember { mutableStateOf(0) }
+        var tabIndex by remember { mutableStateOf(DataStoreUtils.readIntData(Constants.KEY_WORLD_RANKING_TAB_INDEX)) }
 
         // 比赛项目
         TabRow(selectedTabIndex = tabIndex) {
             types.forEachIndexed { index, s ->
                 Tab(selected = index == tabIndex, onClick = {
                     tabIndex = index
+                    scope.launch {
+                        DataStoreUtils.putData(Constants.KEY_WORLD_RANKING_TAB_INDEX, index)
+                    }
                     worldRankingViewModel.updateRankApiBean(uiState.apiBean.copy(catId = index + 6))
                     worldRankingViewModel.setLoading(true)
                     worldRankingViewModel.finishLoadingAnimation(false)
@@ -188,7 +189,10 @@ fun WorldRankingContent(
         }
 
         if (uiState.showPlayerChoices) {
-            Dialog(onDismissRequest = { worldRankingViewModel.showPlayerChoices(false) }, properties = DialogProperties()) {
+            Dialog(
+                onDismissRequest = { worldRankingViewModel.showPlayerChoices(false) },
+                properties = DialogProperties()
+            ) {
                 Column(
                     modifier = Modifier
                         .background(
@@ -211,18 +215,14 @@ fun WorldRankingContent(
                         modifier = Modifier.padding(start = 16.dp),
                     ) {
                         val flag = list[uiState.rankIndex].player1_model.country_model.flag_name_svg
-                        val painter = handleNationIcon(flag)
                         AsyncImage(
                             modifier = Modifier
                                 .size(32.dp)
                                 .padding(3.dp),
                             load = {
-                                loadSvgPainter(
-                                    url = BwfApi.FLAG_URL + flag,
-                                    density = density
-                                )
+                                loadImageBitmap(BwfApi.FLAG_URL + flag)
                             },
-                            imageFor = { painter ?: it },
+                            imageFor = { it },
                             contentDescription = "nation",
                             imageTransformation = ImageTransformation.Circle,
                             contentScale = ContentScale.Crop
@@ -244,18 +244,14 @@ fun WorldRankingContent(
                         modifier = Modifier.padding(start = 16.dp, bottom = 16.dp),
                     ) {
                         val flag = list[uiState.rankIndex].player2_model!!.country_model.flag_name_svg
-                        val painter = handleNationIcon(flag)
                         AsyncImage(
                             modifier = Modifier
                                 .size(32.dp)
                                 .padding(3.dp),
                             load = {
-                                loadSvgPainter(
-                                    url = BwfApi.FLAG_URL + flag,
-                                    density = density
-                                )
+                                loadImageBitmap(url = BwfApi.FLAG_URL + flag)
                             },
-                            imageFor = { painter ?: it },
+                            imageFor = { it },
                             contentDescription = "nation",
                             imageTransformation = ImageTransformation.Circle,
                             contentScale = ContentScale.Crop
@@ -274,8 +270,9 @@ private fun RefreshRanking(perPageKey: Int, worldRankingViewModel: WorldRankingV
     val uiState by worldRankingViewModel.uiState.collectAsState()
 
     SideEffect {
+        val index = DataStoreUtils.readIntData(Constants.KEY_WORLD_RANKING_TAB_INDEX) + 6
         Fuel.post(BwfApi.WORLD_RANKING)
-            .body(uiState.apiBean.copy(pageKey = "$perPageKey").toJson())
+            .body(uiState.apiBean.copy(pageKey = "$perPageKey", catId = index).toJson())
             .header(Headers.CONTENT_TYPE, "application/json")
             .header(
                 Headers.AUTHORIZATION,

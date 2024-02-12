@@ -9,7 +9,19 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import com.google.gson.reflect.TypeToken
+import org.apache.batik.transcoder.Transcoder
+import org.apache.batik.transcoder.TranscoderInput
+import org.apache.batik.transcoder.TranscoderOutput
+import org.apache.batik.transcoder.image.PNGTranscoder
+import org.apache.commons.io.output.ByteArrayOutputStream
+import org.w3c.dom.Document
 import utilities.SvgIcon.*
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.InputStream
+import javax.xml.parsers.DocumentBuilderFactory
+
 
 inline fun <reified T> genericType() = object : TypeToken<T>() {}.type!!
 
@@ -53,4 +65,18 @@ fun AutoThemedIcon(
         modifier = modifier,
         tint = tint
     )
+}
+
+fun transferSvg2Png(svgPath: String, pngPath: String): File {
+    val inputStream: InputStream = FileInputStream(svgPath)
+    val transcoder: Transcoder = PNGTranscoder()
+    val input = TranscoderInput(inputStream)
+    val output = TranscoderOutput(ByteArrayOutputStream())
+    transcoder.transcode(input, output)
+    val pngStream = output.outputStream as ByteArrayOutputStream
+    val fileOutputStream = FileOutputStream(pngPath)
+    pngStream.writeTo(fileOutputStream)
+    fileOutputStream.close()
+    pngStream.close()
+    return File(pngPath)
 }

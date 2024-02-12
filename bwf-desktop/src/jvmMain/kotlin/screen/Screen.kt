@@ -1,5 +1,6 @@
 package screen
 
+@Suppress("ConstPropertyName")
 object Screen {
     const val MainScreen = "MainScreen"
     const val WorldRankingScreen = "WorldRankingScreen"

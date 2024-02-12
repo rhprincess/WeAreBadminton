@@ -40,7 +40,7 @@ fun SettingsScreen(navController: NavController, theme: MutableState<Int>, darkT
     LaunchedEffect(key1 = Unit) {
         theme.value = DataStoreUtils.readIntData(Constants.KEY_THEME)
         previousSizeCount.value = DataStoreUtils.readIntData(Constants.KEY_MATCH_PREVIOUS_SIZE, 4)
-        worldRankPerPage.value = DataStoreUtils.readIntData(Constants.WORLD_RANKING_COUNT_PER_PAGE, 100)
+        worldRankPerPage.value = DataStoreUtils.readIntData(Constants.KEY_WORLD_RANKING_COUNT_PER_PAGE, 100)
         refreshingFrequency.value = DataStoreUtils.readIntData(Constants.KEY_LIVE_MATCH_REFRESHING_FREQUENCY, 5)
         showBreakingDown = DataStoreUtils.readBooleanData(Constants.KEY_SHOW_BREAKING_DOWN, true)
         darkTheme.value = DataStoreUtils.readBooleanData(Constants.KEY_DARK_MODE, false)
@@ -323,7 +323,7 @@ fun SettingsScreen(navController: NavController, theme: MutableState<Int>, darkT
                                             worldRankPerPage.value = it
                                             worldRankingPageDialog = false
                                             scope.launch {
-                                                DataStoreUtils.putData(Constants.WORLD_RANKING_COUNT_PER_PAGE, it)
+                                                DataStoreUtils.putData(Constants.KEY_WORLD_RANKING_COUNT_PER_PAGE, it)
                                             }
                                         }) {
                                         Row(
@@ -338,7 +338,7 @@ fun SettingsScreen(navController: NavController, theme: MutableState<Int>, darkT
                                                     worldRankPerPage.value = it
                                                     scope.launch {
                                                         DataStoreUtils.putData(
-                                                            Constants.WORLD_RANKING_COUNT_PER_PAGE,
+                                                            Constants.KEY_WORLD_RANKING_COUNT_PER_PAGE,
                                                             it
                                                         )
                                                     }

@@ -1,6 +1,5 @@
 package ui.widget
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -27,13 +26,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import data.bean.MatchPreviousResults
-import ui.theme.BwfTheme
+import navcontroller.NavController
+import screen.Screen
 import ui.theme.RankDownColor
 import utilities.BwfApi
+import utilities.PlayerNameUtil
 import utilities.useIcon
 
 @Composable
-fun MatchPanel(results: MatchPreviousResults? = null) {
+fun MatchPanel(
+    navController: NavController,
+    bundle: NavController.ScreenBundle,
+    results: MatchPreviousResults? = null
+) {
 
     val player1Scores = remember { mutableStateListOf<Int>() }
     val player2Scores = remember { mutableStateListOf<Int>() }
@@ -88,9 +93,12 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                         val player12: String = results?.t1p2_player_model?.name_display ?: ""
                         val player21: String = results?.t2p1_player_model?.name_display ?: ""
                         val player22: String = results?.t2p2_player_model?.name_display ?: ""
-                        /**
-                         * p11 p12 p21 p22
-                         */
+
+                        bundle.strings["p11n"] = player11
+                        bundle.strings["p12n"] = player12
+                        bundle.strings["p21n"] = player21
+                        bundle.strings["p22n"] = player22
+                        navController.navigate(Screen.HeadToHeadScreen, bundle)
                     },
                     modifier = Modifier.width(85.dp),
                     border = BorderStroke(
@@ -129,13 +137,12 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     val flag = BwfApi.FLAG_URL + results?.t1p1country_model?.flag_name_svg
-                    val painter = handleNationIcon(flag)
                     // 选手一国旗
                     AsyncImage(
                         load = {
-                            loadSvgPainter(BwfApi.FLAG_URL + results?.t1p1country_model?.flag_name_svg, density)
+                            loadImageBitmap(BwfApi.FLAG_URL + results?.t1p1country_model?.flag_name_svg)
                         },
-                        imageFor = { painter ?: it },
+                        imageFor = { it },
                         contentDescription = "player1",
                         modifier = Modifier
                             .clip(CircleShape)
@@ -151,7 +158,10 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                         verticalArrangement = Arrangement.Center
                     ) {
                         Text(
-                            text = if (results?.t1p1_player_model?.name_display != null) results.t1p1_player_model.name_display else "PLAYER1",
+                            text = if (results?.t1p1_player_model?.name_display != null) PlayerNameUtil.getBwfZhName(
+                                id = results.t1p1_player_model.id,
+                                defaultName = results.t1p1_player_model.name_display
+                            ) else "PLAYER1",
                             fontSize = 15.sp,
                             color = MaterialTheme.colors.onSurface,
                             fontWeight = if (isWinner(
@@ -163,7 +173,10 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                         if (results?.t1p2_player_model != null) {
                             Spacer(modifier = Modifier.height(3.dp))
                             Text(
-                                text = results.t1p2_player_model.name_display,
+                                text = PlayerNameUtil.getBwfZhName(
+                                    id = results.t1p2_player_model.id,
+                                    defaultName = results.t1p2_player_model.name_display
+                                ),
                                 fontSize = 15.sp,
                                 color = MaterialTheme.colors.onSurface,
                                 fontWeight = if (isWinner(
@@ -234,11 +247,10 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     val flag = BwfApi.FLAG_URL + results?.t2p1country_model?.flag_name_svg
-                    val painter = handleNationIcon(flag)
                     // 选手二国旗
                     AsyncImage(
-                        load = { loadSvgPainter(BwfApi.FLAG_URL + results?.t2p1country_model?.flag_name_svg, density) },
-                        imageFor = { painter ?: it },
+                        load = { loadImageBitmap(BwfApi.FLAG_URL + results?.t2p1country_model?.flag_name_svg) },
+                        imageFor = { it },
                         contentDescription = "player2",
                         modifier = Modifier
                             .clip(CircleShape)
@@ -254,7 +266,10 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                         verticalArrangement = Arrangement.Center
                     ) {
                         Text(
-                            text = if (results?.t2p1_player_model?.name_display != null) results.t2p1_player_model.name_display else "PLAYER2",
+                            text = if (results?.t2p1_player_model?.name_display != null) PlayerNameUtil.getBwfZhName(
+                                id = results.t2p1_player_model.id,
+                                defaultName = results.t2p1_player_model.name_display
+                            ) else "PLAYER2",
                             fontSize = 15.sp,
                             color = MaterialTheme.colors.onSurface,
                             fontWeight = if (isWinner(
@@ -266,7 +281,10 @@ fun MatchPanel(results: MatchPreviousResults? = null) {
                         if (results?.t2p2_player_model != null) {
                             Spacer(modifier = Modifier.height(3.dp))
                             Text(
-                                text = results.t2p2_player_model.name_display,
+                                text = PlayerNameUtil.getBwfZhName(
+                                    id = results.t2p2_player_model.id,
+                                    defaultName = results.t2p2_player_model.name_display
+                                ),
                                 fontSize = 15.sp,
                                 color = MaterialTheme.colors.onSurface,
                                 fontWeight = if (isWinner(

@@ -71,7 +71,8 @@ object BwfApi {
     /**
      * Head 2 Head
      */
-    const val HEAD_TO_HEAD = "https://extranet-lv.bwfbadminton.com/api/vue-h2h-count"
+    fun HEAD_TO_HEAD(t1p1: String = "", t1p2: String = "", t2p1: String = "", t2p2: String = ""): String =
+        "https://www.badmintoncn.com/cbo_star/star_h2h.php?t1p1=$t1p1&t1p2=$t1p2&t2p1=$t2p1&t2p2=$t2p2"
 
     /**
      *  All Year matches
@@ -84,6 +85,4 @@ object BwfApi {
     const val WORLD_RANKING = "https://extranet-lv.bwfbadminton.com/api/vue-rankingtable"
     const val BWFAPI_AUTHORIZATION =
         "Bearer 2|NaXRu9JnMpSdb8l86BkJxj6gzKJofnhmExwr8EWkQtHoattDAGimsSYhpM22a61e1crjTjfIGTKfhzxA"
-
-    const val MATCHES_OF_2023 = "https://www.badmintoncn.com/view-25036-1.html"
 }

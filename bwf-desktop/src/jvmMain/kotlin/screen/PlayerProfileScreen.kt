@@ -1,6 +1,5 @@
 package screen
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -29,11 +28,8 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.github.kittinunf.fuel.Fuel
@@ -42,17 +38,15 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import data.bean.*
 import data.payload.*
-import ui.widget.TextTitle
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import navcontroller.NavController
-import navcontroller.rememberNavController
-import ui.theme.BwfTheme
 import ui.viewmodel.PlayerProfileViewModel
 import ui.widget.*
 import utilities.BwfApi
 import utilities.Constants
 import utilities.DataStoreUtils
+import utilities.PlayerNameUtil
 import kotlin.math.roundToInt
 
 @Composable
@@ -68,7 +62,6 @@ fun PlayerProfileScreen(
     val previousResults = remember {
         mutableStateListOf<MatchPreviousResults>()
     }
-    val density = LocalDensity.current
     val breakingDownList = remember { mutableStateListOf<Breaks>() }
     val galleryList = remember { mutableStateListOf<String>() }
 
@@ -203,22 +196,12 @@ fun PlayerProfileScreen(
                     Column(modifier = Modifier.align(Alignment.CenterVertically)) {
                         // Name
                         Text(
-                            text = buildAnnotatedString {
-                                uiState.name.split(" ").forEach {
-                                    if (it == uiState.lastName) {
-                                        withStyle(
-                                            style = SpanStyle(
-                                                fontWeight = FontWeight.Bold
-                                            )
-                                        ) {
-                                            append("$it ")
-                                        }
-                                    } else {
-                                        append("$it ")
-                                    }
-                                }
-                            },
+                            text = PlayerNameUtil.getBwfZhName(
+                                id = playerId.toInt(),
+                                defaultName = uiState.name
+                            ),
                             color = Color.White,
+                            fontWeight = FontWeight.Bold,
                             modifier = Modifier.width(132.dp + (93.dp * (-(toolbarOffsetHeightPx.value / maxUpPx)))),
                             style = if (-(toolbarOffsetHeightPx.value / maxUpPx) > 0.5f) MaterialTheme.typography.h6 else MaterialTheme.typography.h5
                         )
@@ -230,16 +213,11 @@ fun PlayerProfileScreen(
                         ) {
                             // Nation Icon
                             if (uiState.flagUrl.isNotEmpty()) {
-                                val flag = uiState.flagUrl
-                                val painter = handleNationIcon(flag)
                                 AsyncImage(
                                     load = {
-                                        loadSvgPainter(
-                                            uiState.flagUrl,
-                                            density
-                                        )
+                                        loadImageBitmap(uiState.flagUrl)
                                     },
-                                    imageFor = { painter ?: it },
+                                    imageFor = { it },
                                     contentDescription = "nation",
                                     modifier = Modifier
                                         .size(32.dp * (1f - (-(toolbarOffsetHeightPx.value / maxUpPx))))
@@ -376,7 +354,7 @@ fun PlayerProfileScreen(
                                 .padding(horizontal = 16.dp)
 //                            .shadow(3.dp, shape = RoundedCornerShape(8.dp))
                         ) {
-                            MatchPanel(results = previousResults[it])
+                            MatchPanel(navController = navController, bundle = bundle, results = previousResults[it])
                         }
                     }
                 }

@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import data.bean.CurrentLiveResult
@@ -20,7 +19,6 @@ import screen.Screen
 
 @Composable
 fun CurrentLiveMatchCard(navController: NavController, result: CurrentLiveResult? = null) {
-    val density = LocalDensity.current
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -51,7 +49,7 @@ fun CurrentLiveMatchCard(navController: NavController, result: CurrentLiveResult
                 if (result?.tmtLogo != null) {
                     AsyncImage(
                         load = {
-                            loadSvgPainter(result.tmtLogo, density)
+                            loadImageBitmap(result.tmtLogo)
                         },
                         contentDescription = "nation",
                         modifier = Modifier
@@ -86,7 +84,7 @@ fun CurrentLiveMatchCard(navController: NavController, result: CurrentLiveResult
                 if (result?.catLogo != null) {
                     AsyncImage(
                         load = {
-                            loadSvgPainter(result.catLogo, density)
+                            loadImageBitmap(result.catLogo)
                         },
                         contentDescription = "nation",
                         modifier = Modifier

@@ -1,6 +1,5 @@
 package ui.widget
 
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
@@ -24,11 +23,11 @@ import androidx.compose.ui.unit.sp
 import data.bean.PlayerData
 import navcontroller.NavController
 import screen.Screen
-import ui.theme.BwfTheme
 import ui.theme.RankDownColor
 import ui.theme.RankUpColor
 import ui.viewmodel.WorldRankingViewModel
 import utilities.BwfApi
+import utilities.PlayerNameUtil
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
 
@@ -118,7 +117,16 @@ fun WorldRankingCard(
                     .weight(1f)
             ) {
                 Text(
-                    text = if (data.player2_model == null) data.player1_model.name_display else data.player1_model.name_display + " &\n" + data.player2_model.name_display,
+                    text = if (data.player2_model == null) PlayerNameUtil.getBwfZhName(
+                        id = data.player1_id,
+                        defaultName = data.player1_model.name_display
+                    ) else PlayerNameUtil.getBwfZhName(
+                        id = data.player1_id,
+                        defaultName = data.player1_model.name_display
+                    ) + " &\n" + PlayerNameUtil.getBwfZhName(
+                        id = data.player2_id,
+                        defaultName = data.player2_model.name_display
+                    ),
                     modifier = Modifier
                         .align(Alignment.Center)
                         .fillMaxWidth(),
@@ -129,19 +137,15 @@ fun WorldRankingCard(
             Spacer(modifier = Modifier.width(5.dp))
             // Nation
             val flag = data.player1_model.country_model.flag_name_svg
-            val painter = handleNationIcon(flag)
             AsyncImage(
                 modifier = Modifier
                     .size(32.dp)
                     .padding(3.dp)
                     .align(Alignment.CenterVertically),
                 load = {
-                    loadSvgPainter(
-                        url = BwfApi.FLAG_URL + flag,
-                        density = density
-                    )
+                    loadImageBitmap(BwfApi.FLAG_URL + flag)
                 },
-                imageFor = { painter ?: it },
+                imageFor = { it },
                 contentDescription = "nation",
                 imageTransformation = ImageTransformation.Circle,
                 contentScale = ContentScale.Crop
